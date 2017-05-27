@@ -1,0 +1,91 @@
+<ion-header>
+    <ion-navbar navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            Employer
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="dashboard">
+
+    <div class="profile" [ngStyle]="teamPicture">
+        <div class="profilefocus text-center">
+            <div class="avatar dashbord_profile_avatar" light (click)="onShowProfile()">
+                <img src="{{profilePicture}}" alt="Default" id="profilePic" />
+                <!--<img *ngIf="userData.profile_pictureUrl != undefined && userData.profile_pictureUrl != ''" src="{{userData.profile_pictureUrl}}" alt="Default" id="profilePic" />-->
+                <!--<img *ngIf="userData.profile_pictureUrl == undefined || userData.profile_pictureUrl == ''" src="img/user.jpg" alt="Default" id="profilePic"/>                -->
+            </div>
+            <h4 light>{{userData.name}}</h4>
+            <p light>{{userData.email}}</p>
+        </div>
+    </div>
+
+    <!-- Short Listed and Offered Candidate List -->
+    <ion-row class="employer-dashboards">
+        <ion-col width-50 class="shortlisted" (click)="onShowShortedList()">
+            <h3>{{shorted_list.length}}</h3> Shortlisted
+        </ion-col>
+        <ion-col width-50 class="offered" (click)="onShowOffersSent()">
+            <h3>{{offers_list.length}}</h3> Offered
+        </ion-col>
+    </ion-row>
+
+    <!-- shortlist candidate list -->
+    <div class="shortlisted-list">
+        <h3>
+            <ion-icon name="md-star" item-left></ion-icon>
+                Shortlisted
+            <ion-icon name="ios-information-circle-outline" class="info-part" item-right></ion-icon>
+        </h3>
+
+        <div *ngFor="let list_item of shorted_list; let list_index=index">
+            <ion-card class="offersToReview" (click)="onShowShortedEmployee(list_item,list_index)" *ngIf="list_index < 4">
+                <ion-item>
+                    <ion-avatar item-left>
+                        <img *ngIf="list_item.employee.profile_pictureUrl!=undefined && list_item.employee.profile_pictureUrl!='' " src="{{list_item.employee.profile_pictureUrl}}">
+                        <img *ngIf="list_item.employee.profile_pictureUrl==undefined || list_item.employee.profile_pictureUrl=='' " src="img/user.jpg">
+                    </ion-avatar>
+                    <h2>{{list_item.employee.firstname}} {{list_item.employee.lastname}}</h2>
+                    <p>{{list_item.employee.desired_job_type}}</p>
+                    <p>{{list_item.employee.preffered_job_status}}</p>
+                </ion-item>
+            </ion-card>
+        </div>
+         <div class="nodatafound notfoundinfo" *ngIf='shorted_list.length==0'>
+            <img src="img/nodatafound.png"/>
+            <p>No shortlisted candidate to display</p>
+        </div>
+        <p class="text-center seemore" *ngIf="shorted_list.length > 4" (click)="onShowShortedList()"> SEE MORE</p>
+
+    </div>
+
+    <!-- Offered List -->
+    <div class="offered-list">
+        <h3>
+            <ion-icon name="ios-send" item-left></ion-icon>
+                  Offers Sent
+            <ion-icon name="ios-information-circle-outline" class="info-part" item-right></ion-icon> 
+        </h3>
+        <div *ngFor="let list_item of offers_list; let list_index=index">
+            <ion-card class="offersToReview" (click)="onShowOfferDetails(list_item,list_index)" *ngIf="list_index < 4">
+                <ion-item>
+                    <ion-avatar item-left>
+                        <img *ngIf="list_item.employee.profile_pictureUrl!=undefined && list_item.employee.profile_pictureUrl!='' " src="{{list_item.employee.profile_pictureUrl}}">
+                        <img *ngIf="list_item.employee.profile_pictureUrl==undefined || list_item.employee.profile_pictureUrl=='' " src="img/user.jpg">
+                    </ion-avatar>
+                    <h2>{{list_item.employee.firstname}} {{list_item.employee.lastname}}</h2>
+                    <p>{{list_item.employee.desired_job_type}}</p>
+                    <p>{{list_item.employee.preffered_job_status}}</p>
+                </ion-item>
+            </ion-card>
+        </div>
+        <div class="nodatafound notfoundinfo" *ngIf='offers_list.length==0'>
+            <img src="img/nodatafound.png"/>
+            <p>No offers sent</p>
+        </div>
+        <p class="text-center seemore" *ngIf="offers_list.length > 4" (click)="onShowOffersSent()"> SEE MORE</p>
+    </div>
+</ion-content>

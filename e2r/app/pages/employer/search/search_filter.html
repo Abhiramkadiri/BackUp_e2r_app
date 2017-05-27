@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-navbar navbar>
+        <ion-title>Filter</ion-title>
+        <ion-buttons end>
+            <button (click)="clearFilter()">Clear</button>
+            <button (click)="applyFilter()">Apply</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content class="filter filterpage-design">
+    <ion-list class="mb0">
+        <ion-list-header>
+            Years of Experience :   <span class="minmax">Min : {{expreance_value.lower}} <span>|</span> Max : {{expreance_value.upper}}</span>
+        </ion-list-header> 
+        <ion-item class="nomarleft">
+            <!--<ion-label class="range_left">Min : {{expreance_value.lower}} </ion-label>
+            <ion-label class="range_right">Max : {{expreance_value.upper}} </ion-label>-->
+            <ion-range dualKnobs="true"  pin="true" [(ngModel)]="expreance_value" min="0" max="40" step="1" snaps="false" (ngModelChange)="onChangeExpFilter()">
+              <ion-icon range-left small name="md-remove"></ion-icon>
+              <ion-icon range-right name="md-add"></ion-icon>
+            </ion-range>
+        </ion-item>
+        <ion-item class="nomarleft">
+            <ion-label class="p-title">Relocation :</ion-label>
+            <ion-select [(ngModel)]="relocation">
+                <ion-option [value]="All">Any</ion-option>
+                <ion-option [value]="Yes">Yes</ion-option>
+                <ion-option [value]="No">No</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-list-header (click)="onShowList('education')">
+            Education Level
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-list-header>
+        <div class="filterlistpage" *ngFor="let edu of values_list.qualification">
+            <ion-item *ngIf="edu.status">
+                <div>{{edu.name}}</div>
+                <ion-icon name="md-close" item-right class="check-icon" (click)="onRemoveFileterEdu(edu)"></ion-icon>
+            </ion-item>
+        </div>
+        <ion-list-header (click)="onShowList('employement')">
+            Employement Type
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-list-header>
+        <div class="filterlistpage" *ngFor="let jobtype of values_list.job_status">
+            <ion-item *ngIf="jobtype.status">
+                <div>{{jobtype.name}}</div>
+                <ion-icon name="md-close" item-right class="check-icon" (click)="onRemoveFileterJobStatus(jobtype)"></ion-icon>
+            </ion-item>
+        </div>
+        <ion-list-header (click)="onShowList('skill')">
+            Skills
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-list-header>
+        <div class="filterlistpage"  *ngFor="let skill of skills; let skill_index=index">
+            <ion-item>
+                <div>{{skill}}</div>
+                <ion-icon name="md-close" item-right class="check-icon" (click)="onRemoveFileterSkills(skill)"></ion-icon>
+            </ion-item>
+        </div>
+
+    </ion-list>
+</ion-content>

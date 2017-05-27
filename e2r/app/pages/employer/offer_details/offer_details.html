@@ -1,0 +1,226 @@
+<ion-header>
+    <ion-navbar navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>        
+        <ion-title>
+            Offer Details
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="dashboard shortlisted-profile">
+    <div class="profile">
+        <div class="profilefocus text-center">
+            <div class="avatar" light>
+                <img src="{{profilePicture}}" alt="Default" id="profilePic" />
+            </div>
+            <h4 light>{{userData.name}}</h4>
+            <p light>UX Consultant</p>
+        </div>
+    </div>
+    
+    <ion-row>
+        <ion-col width-50>
+            <button full class="review-profile">
+                <ion-icon name="md-list-box"></ion-icon>
+                Review Profile
+            </button>
+        </ion-col>
+        <ion-col width-50>
+            <button full class="remove-profile">
+                <ion-icon name="md-close"></ion-icon>
+                Remove
+            </button>
+        </ion-col>
+    </ion-row>
+    
+    <ion-card (click)="ratingPage()">
+        <ion-card-header class="cardHead">Rating <span class="pull-right orangecolor">65/100</span></ion-card-header>
+        <ion-card-content>
+            <div class="cssProgress">
+                <div class="progress1">
+                    <div class="cssProgress-bar cssProgress-info cssProgress-stripes" data-percent="75" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+            <p class="ashcolor">Profile Strength: <strong>Good</strong>
+                <span class="pull-right moreInfo">  <ion-icon name="ios-arrow-forward"></ion-icon></span>
+            </p>
+        </ion-card-content>
+    </ion-card>
+    
+    <!-- Ravi Added -->
+    <ion-card class="basic">
+        <ion-card-header class="information">
+            <ion-icon name="information-circle"></ion-icon> &nbsp;&nbsp;Information
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item>
+                    <span>5+ Years</span>
+                    <p>Years of Experience</p>
+                </ion-item>
+                <ion-item>
+                    <span>Senior Executive</span>                
+                    <p>Career Level</p>
+                </ion-item>
+                <ion-item>
+                    <span>SharePoint UX Consultant</span>                
+                    <p>Current Job Details</p>
+                </ion-item>                                            
+                <ion-item>
+                    <span>KL Software Technologies</span>                 
+                    <p>Current Company</p>
+                </ion-item>
+                <ion-item>
+                    <span>Current Location</span>                
+                    <p>Chennai, Tamil Nadu</p>
+                </ion-item>
+                <ion-item>
+                    <span>Full Time</span>                
+                    <p>Job Type</p>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    
+    
+    <!--// Experience Infomation -->
+	<ion-card  class="basic">
+	  <ion-card-header class="information"> 
+          <ion-icon name="briefcase"></ion-icon> &nbsp;&nbsp;Experience Summary 
+	  </ion-card-header>
+	   <ion-card-content class="experience-info">
+            <ion-list>
+                <ion-item>
+                    <span>Sharepoint UX Consultant </span>
+                    <p>KL Software Technologies</p>
+                    <p class="time-peroid"><ion-icon name="md-time"></ion-icon> December 2013 – Present (6 months)</p>
+                </ion-item>
+                <ion-item>
+                    <span>Freelancer: Freelance / Graphic Design, Brand Development</span>                
+                    <p>Web Design and UI Design</p>
+                    <p class="time-peroid"><ion-icon name="md-time"></ion-icon> January 2013 – November 2013 (11 months)</p>
+                </ion-item>
+                <ion-item>
+                    <span>UI Designer</span>                
+                    <p>Allerin Tech Pvt Ltd</p>
+                    <p class="time-peroid"><ion-icon name="md-time"></ion-icon> September 2012 – December 2012 (4 months)</p>
+                </ion-item>                                            
+                <ion-item>
+                    <span>Web / Graphic Designer, Server Administrator</span>                 
+                    <p>Aarkstore Enterprise</p>
+                    <p class="time-peroid"><ion-icon name="md-time"></ion-icon> August 2008 – July 2012 (4 years)</p>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+	</ion-card>
+    <!-- // Ravi Added -->
+
+
+    
+    <!--<ion-list>
+        <ion-row (click)="skillShow()" class="accordianrow">
+            <ion-col width-90><strong>Rating Based on Skills</strong></ion-col>
+            <ion-col width-10>
+                <ion-icon name="add-circle" *ngIf="!skill"></ion-icon>
+                <ion-icon name="remove" *ngIf="skill"></ion-icon>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="skill">
+            <ion-item>HTML 74/100</ion-item>
+            <ion-item>CSS 75/100</ion-item>
+            <ion-item>UI/UX 80/100</ion-item>
+        </div>
+        <ion-row (click)="offerShow()" class="accordianrow">
+            <ion-col width-90><strong>Offer Section</strong></ion-col>
+            <ion-col width-10>
+                <ion-icon name="add-circle" *ngIf="!offer"></ion-icon>
+                <ion-icon name="remove" *ngIf="offer"></ion-icon>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="offer">
+            <ion-item><strong>Relocation</strong>
+                <p>Yes</p>
+            </ion-item>
+            <ion-item><strong>Desired Salary</strong>
+                <p>6-10 Lakhs</p>
+            </ion-item>
+            <ion-item (click)="openBidHistory()"><strong>Number of companies currently bidding 3</strong>
+                <p>View Bids</p>
+            </ion-item>
+            <ion-item><strong>Last Bid (Rs.)</strong>
+                <p>7.5 Lakhs / Annum</p>
+            </ion-item>
+            <ion-item>
+                <ion-label>Your Offer (Rs.)</ion-label>
+                <ion-select [(ngModel)]="gaming">
+                    <ion-option value="nes">8 Laks/Annum</ion-option>
+                    <ion-option value="n64">10 Laks/Annum</ion-option>
+                    <ion-option value="ps">12 Laks/Annum</ion-option>
+                    <ion-option value="genesis">14 Laks/Annum</ion-option>
+                    <ion-option value="saturn">18 Laks/Annum</ion-option>
+                    <ion-option value="snes">25 Laks/Annum</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Job Description</ion-label>
+                <ion-textarea></ion-textarea>
+            </ion-item>
+            <button type="submit" block class="btn btn-default padding">Submit Offer</button>
+        </div>
+        <ion-row (click)="experienceShow()" class="accordianrow">
+            <ion-col width-90><strong>Experience</strong></ion-col>
+            <ion-col width-10>
+                <ion-icon name="add-circle" *ngIf="!experience"></ion-icon>
+                <ion-icon name="remove" *ngIf="experience"></ion-icon>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="experience">
+            <ion-item><strong>Years of Experience </strong>
+                <p>5+ Years</p>
+            </ion-item>
+            <ion-item><strong>Career Level</strong>
+                <p>Senior Executive</p>
+            </ion-item>
+            <ion-item><strong>Current Job Details</strong>
+                <p>SharePoint UX Consultant</p>
+            </ion-item>
+            <ion-item><strong>Current Company</strong>
+                <p>KL Software Technologies</p>
+            </ion-item>
+            <ion-item><strong>Current Location</strong>
+                <p>Chennai, Tamil Nadu</p>
+            </ion-item>
+            <ion-item><strong>Job Type</strong>
+                <p>Full Time</p>
+            </ion-item>
+        </div>
+        <ion-row (click)="experiencesummaryShow()" class="accordianrow">
+            <ion-col width-90><strong>Experience Summary</strong></ion-col>
+            <ion-col width-10>
+                <ion-icon name="add-circle" *ngIf="!experienceSummary"></ion-icon>
+                <ion-icon name="remove" *ngIf="experienceSummary"></ion-icon>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="experienceSummary" padding>
+            <p>Sharepoint UX Consultant : KL Software Technologies December 2013 – Present (6 months)</p>
+            <p>Freelancer: Freelance / Graphic Design, Brand Development, Web Design and UI Design January 2013 – November 2013 (11 months)</p>
+            <p>UI Designer : Allerin Tech Pvt Ltd September 2012 – December 2012 (4 months)</p>
+            <p>Web / Graphic Designer, Server Administrator Aarkstore Enterprise August 2008 – July 2012 (4 years)</p>
+        </div>
+    </ion-list>-->
+
+</ion-content>
+<ion-footer>
+    <ion-toolbar position="bottom" class="submit-offer-but">
+        <button full (click) = "submitoffer()">
+            <ion-item>
+                Submit Offer
+                <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+            </ion-item>
+        </button>
+    </ion-toolbar>
+</ion-footer>

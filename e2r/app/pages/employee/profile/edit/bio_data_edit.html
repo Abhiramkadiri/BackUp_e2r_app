@@ -1,0 +1,83 @@
+<ion-header>
+
+    <ion-toolbar>
+        <ion-title>
+            Bio
+        </ion-title>
+        <ion-buttons start class="close-left">
+            <button (click)="dismiss($event)">
+              <span showWhen="ios">Cancel</span>
+              <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+<ion-content class="lightdarkbg iputfocusandroid">
+  <ion-card>
+    <form (ngSubmit)="saveBioEdit(bioInputs)" #bioeditForm="ngForm">
+    <ion-list class="editForms">
+
+        <!--<ion-item>
+            <ion-label stacked>Current Location</ion-label>
+            <ion-input type="text" [(ngModel)]="bioInputs.current_location"></ion-input>
+        </ion-item>-->
+
+        <ion-label stacked>Current Country</ion-label>
+        <ion-item (click)="countryValue('current')">
+            {{bioInputs.current_country}}
+        </ion-item>
+        <ion-label stacked>Current Location</ion-label>
+        <ion-item (click)="cityValue(bioInputs.current_country,'current')" *ngIf="bioInputs.current_country != 'Select Country'">
+            {{bioInputs.current_location}}
+        </ion-item>
+
+
+        <ion-item width-50 class="itemSpit pr10">
+            <ion-label stacked>Desired Salary</ion-label>
+            <ion-input type="number" [(ngModel)]="bioInputs.desired_salary"></ion-input>
+        </ion-item>
+
+        <ion-item width-50 class="itemSpit pl0">
+            <ion-label stacked>&nbsp;&nbsp;</ion-label>
+            <ion-select [(ngModel)]="bioInputs.amountType">
+                <ion-option *ngFor="let currencyItem of uiValues[0].currency; let i=index">{{currencyItem.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Preffered Job Status</ion-label>
+            <ion-select [(ngModel)]="bioInputs.preffered_job_status">
+                <ion-option *ngFor="let jstatusItem of uiValues[0].job_status; let i=index" [value]='jstatusItem.name'>{{jstatusItem.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Desired Job Type</ion-label>
+            <ion-select [(ngModel)]="bioInputs.desired_job_type">
+                <ion-option *ngFor="let jtypeItem of uiValues[0].job_type; let i=index" [value]='jtypeItem.name'>{{jtypeItem.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Employment Eligibility Status</ion-label>
+            <ion-select [(ngModel)]="bioInputs.eligibilty_status">
+                <ion-option *ngFor="let eligiblityItem of uiValues[0].employment_eligiblity; let i=index" [value]='eligiblityItem.name'>{{eligiblityItem.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-label stacked>Preferred Location</ion-label>
+        <ion-item (click)="countryValue('preffered')">
+            {{bioInputs.countries_select}}
+        </ion-item>
+        <ion-item (click)="cityValue(bioInputs.countries_select,'preffered')" *ngIf="bioInputs.countries_select != 'Select Country'">
+            {{bioInputs.cities_select}}
+        </ion-item>
+        <ion-item>
+            <ion-label>Relocation</ion-label>
+            <ion-toggle [(ngModel)]="bioInputs.relocation"></ion-toggle>
+        </ion-item>
+    </ion-list>
+    <button type="submit" block class="btn btn-default mt20">Save</button>
+    </form>
+  </ion-card>
+</ion-content>

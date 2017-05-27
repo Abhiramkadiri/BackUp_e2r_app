@@ -1,0 +1,94 @@
+<ion-header>
+
+    <ion-toolbar>
+        <ion-title>
+            Basic
+        </ion-title>
+        <ion-buttons start class="close-left">
+            <button (click)="dismiss()">
+							<span showWhen="ios">Cancel</span>
+							<ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+						</button>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="lightdarkbg iputfocusandroid">
+	<ion-card>
+    <form (ngSubmit)="saveBasicEdit(basicInputs)" #basiceditForm="ngForm">
+        <ion-list class="editForms">
+
+            <div class="text-center">
+                <p>Profile photo</p>
+                <div class="avatar employee_profile_edit_avatar">
+                    <img src="{{profilePicture}}" alt="Default" id="profilePic" />
+                    <ion-icon class="editPhoto" name="md-create" (click)="presentActionSheet()"></ion-icon>
+                </div>
+            </div>
+
+            <ion-item>
+                <ion-label stacked>First Name (Required)</ion-label>
+                <ion-input type="text" [(ngModel)]="basicInputs.firstName" required ngControl="firstName" #firstName="ngForm"></ion-input>
+            </ion-item>
+            <div class="invalid" [hidden]="firstName.valid || firstName.pristine">
+                Enter Firstname
+            </div>
+            <ion-item>
+                <ion-label stacked>Last Name (Required)</ion-label>
+                <ion-input type="text" [(ngModel)]="basicInputs.lastName" required ngControl="lastName" #lastName="ngForm"></ion-input>
+            </ion-item>
+            <div class="invalid" [hidden]="lastName.valid || lastName.pristine">
+                Enter Lastname
+            </div>
+            <ion-item>
+                <ion-label stacked>Email (Required)</ion-label>
+                <ion-input type="email" [(ngModel)]="basicInputs.email" required ngControl="email" #email="ngForm" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"></ion-input>
+            </ion-item>
+            <div class="invalid" [hidden]="email.valid || email.pristine || email.pattern">
+                Enter valid email
+            </div>
+            <ion-item>
+                <ion-label stacked>Contact Type</ion-label>
+                <ion-select [(ngModel)]="basicInputs.numberType" (change)="getcontactType(basicInputs.numberType)">
+                    <ion-option value="home" selected="selected">Home</ion-option>
+                    <ion-option value="mobile">Mobile</ion-option>
+                    <ion-option value="work">Work</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Contact Number (Required)</ion-label>
+                <ion-input type="tel" [(ngModel)]="basicInputs.phone[basicInputs.numberType]" pattern=".{6,12}" required ngControl="phone" #phone="ngForm"></ion-input>
+            </ion-item>
+            <div class="invalid" [hidden]="phone.valid || phone.pristine">
+                Enter Valid Phone Number
+            </div>
+            <ion-item>
+                <ion-label stacked>Messenger</ion-label>
+                <ion-select [(ngModel)]="basicInputs.msg">
+                    <ion-option value="skype" selected="skype">Skype</ion-option>
+                    <ion-option value="aim" >AIM</ion-option>
+                    <ion-option value="live">Windows Live</ion-option>
+                    <ion-option value="icq">ICQ</ion-option>
+                    <ion-option value="qq">QQ</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Messenger ID</ion-label>
+                <ion-input type="text" [(ngModel)]="basicInputs.messenger[basicInputs.msg]"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Facebook Profile Url</ion-label>
+                <ion-input type="url" [(ngModel)]="basicInputs.facebook"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Linkedin Profile Url</ion-label>
+                <ion-input type="url" [(ngModel)]="basicInputs.linked_in"></ion-input>
+            </ion-item>
+
+
+        </ion-list>
+        <button type="submit" block class="btn btn-default" [disabled]="!basiceditForm.form.valid">Save</button>
+    </form>
+	</ion-card>
+</ion-content>

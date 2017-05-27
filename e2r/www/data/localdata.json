@@ -1,0 +1,91 @@
+{
+    "modified":"2016-05-04T00:00:00",
+    "skills": [
+        {
+        "Id":1,"name":"HTML5","status":false
+        },
+        {
+        "Id":2,"name":"CSS3","status":false
+        },
+        {
+        "Id":3,"name":"Phonegap","status":false
+        },
+        {
+        "Id":4,"name":"Jquery","status":false
+        },
+        {
+        "Id":5,"name":"Ionic","status":false
+        },
+        {
+        "Id":6,"name":"Json","status":false
+        },
+        {
+        "Id":7,"name":"Photoshop","status":false
+        },
+        {
+        "Id":8,"name":"Java","status":false
+        },
+        {
+        "Id":9,"name":"C","status":false
+        },
+        {
+        "Id":10,"name":"C++","status":false
+        },
+        {
+        "Id":11,"name":"Javascript","status":false
+        },
+        {
+        "Id":12,"name":"PHP","status":false
+        }
+
+    ],
+    "desired_salaryData" :[
+      { "id": 0, "name": "4 - 6 Lakhs / Annum" },
+      { "id": 1, "name": "6 - 8 Lakhs / Annum" },
+      { "id": 2, "name": "8 - 10 Lakhs / Annum" },
+      { "id": 3, "name": "10 - 15 Lakhs / Annum" },
+      { "id": 4, "name": "15 - 20 Lakhs / Annum" },
+      { "id": 5, "name": "20 - 25 Lakhs / Annum" },
+      { "id": 6, "name": "30 - 35 Lakhs / Annum" }
+    ],
+    "prefered_jobStatus" :[
+      { "id": 0, "name": "Full Time" },
+      { "id": 1, "name": "Part Time" }
+    ],
+    "industry" :[
+      { "id": 0, "name": "Aerospace industry","status":false},
+      { "id": 1, "name": "Chemical industry","status":false },
+      { "id": 2, "name": "Entertainment industry","status":false },
+      { "id": 3, "name": "Health care industry","status":false },
+      { "id": 4, "name": "Software industry","status":false },
+      { "id": 5, "name": "Construction industry","status":false },
+      { "id": 6, "name": "Manufacturing","status":false },
+      { "id": 7, "name": "Transport industry","status":false }
+    ],
+    "education_level" :[
+      { "id": 0, "name": "Any","status":false },
+      { "id": 1, "name": "Graduate","status":false },
+      { "id": 2, "name": "Bachelor","status":false },
+      { "id": 3, "name": "Master","status":false },
+      { "id": 4, "name": "Doctorate","status":false }
+    ],
+    "employement_type" :[
+      { "id": 0, "name": "Full Time","status":false },
+      { "id": 1, "name": "Contract - corp-to-corp","status":false },
+      { "id": 2, "name": "Contract - Independent","status":false },
+      { "id": 3, "name": "Contract - W2","status":false },
+      { "id": 4, "name": "Contract to Hire - Independent","status":false },
+      { "id": 5, "name": "Contract to Hire - W2","status":false },
+      { "id": 6, "name": "Part Time","status":false }
+    ],
+    "basic_search" :[
+      "Industry",
+      "Skills",
+      "Education Level"
+    ],
+    "advance_search" :[
+      "Employement Type",
+      "Location Preference",
+      "Search Results View"
+    ]
+}

@@ -1,0 +1,57 @@
+<!-- Toolbar End Design -->
+<ion-header>
+	<ion-navbar>
+        <ion-title>
+            Experience
+        </ion-title>
+        <!--<ion-buttons start>
+            <button (click)="dismiss()">
+				<span showWhen="ios">Cancel</span>
+				<ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+			</button>
+        </ion-buttons>-->
+        <!--<ion-buttons end *ngIf="is_owner">
+            <button (click)="onOpenExperience('create')">
+			<span>Add</span>
+		</button>
+        </ion-buttons>-->
+	</ion-navbar>
+</ion-header>
+<!-- // Toolbar End Design -->
+
+
+<!-- // Content End Design -->
+<ion-content class="lightdarkbg editexperience">
+    <ion-item>
+            Total Experience :
+                <span>{{userData.total_experience}}</span>
+    </ion-item>
+    <ion-card class="profile-editpart" *ngFor="let experienceitem of userData.experience; let i=index">
+		<ion-card-content>
+			<div class="text-right rightedit" *ngIf="is_owner">
+                <button danger clear (click)="onRemoveExperience(i)"> 
+                    <ion-icon name="md-trash" ></ion-icon>
+                </button>
+                <button secondary clear (click)="onOpenExperience('edit', i)">
+                    <ion-icon name="md-create" ></ion-icon>
+                </button>
+            </div>
+            <!--<div *ngIf="is_owner" item-right>
+                <ion-icon name="md-create" (click)="onOpenExperience('edit', i)"></ion-icon>
+                <ion-icon name="trash" (click)="onRemoveExperience(i)"></ion-icon>
+            </div>-->
+			<div class="conleft">
+           		<h2><strong>{{experienceitem.title}}</strong></h2>
+				<p>{{experienceitem.company_name}}</p>
+				<p *ngIf="experienceitem.to_year==''">{{experienceitem.from_year}} – Present</p>
+				<p *ngIf="experienceitem.to_year!=''">{{experienceitem.from_year}} – {{experienceitem.to_year}} </p>
+			</div>
+		</ion-card-content>
+    </ion-card>
+</ion-content>
+
+<ion-footer *ngIf="is_owner" class="footerbtn common-edit">
+    <button fab fab-right fab-bottom class="fixedBottom" (click)="onOpenExperience('create')" *ngIf="!edit">
+    <ion-icon name="md-add"></ion-icon>
+  </button>
+</ion-footer>

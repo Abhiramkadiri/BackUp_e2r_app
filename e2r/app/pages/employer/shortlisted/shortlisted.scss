@@ -1,0 +1,41 @@
+.shortlisted {
+    background-color: #f5f5f5;
+}
+.employer-shortlisted {
+    /*padding: 0;*/
+    text-align: center;
+    ion-col {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: #fff;
+    }
+    .offered {
+        background:#1a85bc;
+    }
+    .shortlisted {
+        background:  #f0ad4e;
+    }
+    h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+}
+.short-listed {
+    ion-avatar {
+        height: 3.6rem;
+        width: 3.6rem;
+        border-radius:50%;
+        overflow: hidden;
+        img {
+            border-radius:initial;
+            max-width: inherit;
+            max-height: inherit;
+        }
+    }
+    .offersToReview {
+        ion-icon  {
+            color: #f0ad4e;
+        }
+    }
+}

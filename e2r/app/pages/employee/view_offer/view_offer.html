@@ -1,0 +1,96 @@
+<ion-header>
+	<ion-navbar navbar>
+      <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>		
+		<ion-title>
+			View Offer 
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="offerInfo">
+<div class="offerPageMain">
+	<div class="text-center">
+			<div class="avatar" light >
+					<img src="{{getEmployerProfilePicture(current_offer.employer.profile_pictureUrl)}}" alt="Default" id="profilePic"/>
+			</div>
+			<h4 light>{{current_offer.employer.name}}</h4>
+			<p light *ngIf="current_offer.employer.portal"><ion-icon name="globe"></ion-icon> {{current_offer.employer.portal}}</p>
+			<p light>  <ion-icon name="pin"></ion-icon> {{current_offer.employer.location}}</p>			
+    </div>
+
+		<div class="text-center btn-view-profile" (click)="onViewEmployerProfile()">
+			<button> Review Profile</button>
+		</div>	
+</div>
+
+<ion-card class="companyBasicInformation">
+   <ion-card-content>
+	<ion-list no-lines class="pl0">
+	  <ion-item>
+	    <h2>Industry</h2>
+	    <p>{{current_offer.employer.industry}}</p>
+	  </ion-item>
+
+	   <ion-item>
+	    <h2>Type</h2>
+	    <p>{{current_offer.employer.company_type}}</p>
+	  </ion-item>
+
+	   <ion-item>
+	    <h2>Company Size</h2>
+	    <p>{{current_offer.employer.company_size}} employees</p>
+	  </ion-item>
+
+	   <ion-item>
+	    <h2>Founded</h2>
+	    <p>{{current_offer.employer.founded}}</p>
+	  </ion-item>
+	</ion-list>
+   </ion-card-content>
+</ion-card>
+
+<div padding class="offerMain" >
+	{{initializeActionButtons(current_offer.offer_status)}}
+	<div class="offerAlert">
+		<h4>Job Offer / Salary</h4>
+		<h3>{{current_offer.offer_amount}} {{current_offer.offer_currency}}/ Annum</h3>
+	</div>
+	<button *ngIf="show_btn_accept" block class="acceptOffer" (click)="onUpdateOfferStatus('accept')">Accept Offer</button>
+	<button *ngIf="show_btn_interested" block class="interestedOffer" (click)="onUpdateOfferStatus('interested')">Potentially Interested</button>
+	<button *ngIf="show_btn_reject" block class="rejectOffer" (click)="onUpdateOfferStatus('reject')">Reject Offer</button> <!-- Popup will open to say Yes/No -->
+</div>
+
+<ion-card class="offerDescription">
+   <ion-card-header class="cardHead">View Job Description</ion-card-header>
+   <ion-card-content>
+	<ion-list no-lines class="pl0">
+	  <!--<ion-item>
+	    <h2>Industry Preferred</h2>
+	    <p>Website Solution / Website Portal Development / Design</p>
+	  </ion-item>-->
+
+	   <ion-item>
+			<ion-icon *ngIf='current_offer.job.job_descriptionUrl' name="md-cloud-download" item-right (click)="onOpenJobDescription(current_offer.job.job_descriptionUrl)"></ion-icon>
+	    <h2>Job Description</h2>
+	    <p [innerHTML]="current_offer.job.job_description"></p>
+	  </ion-item>
+
+	   <ion-item>
+	    <h2>Job Type</h2>
+	    <p>{{current_offer.job.job_type}}</p>
+	  </ion-item>
+
+	   <ion-item>
+	    <h2>Job Skills</h2>
+	    <p>{{current_offer.job.skill}}</p>
+	  </ion-item>
+	</ion-list>
+   </ion-card-content>
+</ion-card>
+
+
+
+	
+</ion-content>

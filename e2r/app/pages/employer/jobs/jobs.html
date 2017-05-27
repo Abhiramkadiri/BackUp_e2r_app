@@ -1,0 +1,97 @@
+<ion-header>
+
+  <ion-navbar navbar>
+    <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>  
+    <ion-title>{{screen_title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="jobs-page companyProfile">
+    <div class='JobSlides white-bg' id='Step1' [ngStyle]="{'left': step1_Left}">
+        <!--<div class="subheader-info">
+            <ion-item>
+                <ion-icon name="md-arrow-forward" item-right (click)='nextStep()'></ion-icon>
+            </ion-item>
+        </div>-->
+        <ion-list class="mb0">
+            <ion-item>
+                <ion-label stacked class="p-title">Job Position<em class="red">*</em></ion-label>
+                <!--<ion-input class="lpad0" type='text' [(ngModel)]="JobDetails.position"></ion-input>-->
+                <ion-select [(ngModel)]="JobDetails.position">
+                    <ion-option *ngFor="let pos of positionList" [value]="pos.name">{{pos.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked class="p-title">Job Type<em class="red">*</em></ion-label>
+                <!--<ion-input class="lpad0" type='text' [(ngModel)]="JobDetails.job_type"></ion-input>-->
+                <ion-select [(ngModel)]="JobDetails.job_type">
+                    <ion-option *ngFor="let type of jobTypeList" [value]="type.name">{{type.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked class="p-title">Min Years of experience<em class="red">*</em></ion-label>
+                <ion-input class="lpad0" type='number' [(ngModel)]="JobDetails.minimun_experience" (keypress)='onKeypress($event)' ion-maxlength="2"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked class="p-title">Maximum salary<em class="red">*</em></ion-label>
+                <ion-input class="lpad0" type='number' [(ngModel)]="JobDetails.max_ctc"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked class="p-title">Currency<em class="red">*</em></ion-label>
+                <!--<ion-input class="lpad0" type='text' [(ngModel)]="JobDetails.currency"></ion-input>-->
+                <ion-select [(ngModel)]="JobDetails.currency">
+                    <ion-option *ngFor="let curr of currencyList" [value]="curr.name">{{curr.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked class="p-title">Job Status<em class="red">*</em></ion-label>
+                <ion-select [(ngModel)]="JobDetails.status">
+                    <ion-option [value]="Open">Open</ion-option>
+                    <ion-option [value]="Closed">Closed</ion-option>
+                    <ion-option [value]="Hold">Hold</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+    </div>
+    <div class='JobSlides white-bg' id='Step2' [ngStyle]="{'left': step2_Left}">
+        <!--<div class="subheader-info">
+            <ion-item>
+                <ion-icon name="md-arrow-back" item-left (click)='prevStep()' ></ion-icon>
+                <ion-icon name="md-arrow-forward" item-right (click)='nextStep()'></ion-icon>
+            </ion-item>
+        </div>-->
+        <ion-list class="mb0">
+            <ion-item>
+                <ion-label stacked class="p-title">Job Skills<em class="red">*</em></ion-label>
+                <ion-textarea class="lpad0" type='text' [(ngModel)]="JobDetails.skill"></ion-textarea>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked class="p-title">Job Responsibilites<em class="red">*</em></ion-label>
+                <ion-textarea class="lpad0" type='text' [(ngModel)]="JobDetails.job_responsibilites"></ion-textarea>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked class="p-title">Job Description<em class="red">*</em></ion-label>
+                <ion-textarea class="lpad0" type='text' [(ngModel)]="JobDetails.job_description"></ion-textarea>
+            </ion-item>
+            <ion-item>
+                <input type="file" id="job_description" class="file-input" [(ngModel)]="Description_Doc" (change)="uploadDocument()" style="padding-top:8px">
+            </ion-item>
+            <ion-item>
+                <a *ngIf='JobDetails.job_descriptionUrl!=undefined && JobDetails.job_descriptionUrl!=null' download="" target="_blank" href="{{JobDetails.job_descriptionUrl}}">Click here to download job description</a>
+            </ion-item>
+        </ion-list>
+    </div>
+</ion-content>
+
+<ion-footer class="editjobslist">
+    <button class="prev-btn" fab fab-left secondary fab-bottom *ngIf='currentStep>1' (click)='prevStep()'>
+        <ion-icon name="md-arrow-back"></ion-icon>
+    </button>
+    <button fab fab-right fab-bottom secondary class="next-btn" *ngIf='currentStep<2' (click)='nextStep()'>
+        <ion-icon name="md-arrow-forward"></ion-icon>
+    </button>
+    <button class="pull-right btn-steps"  *ngIf='currentStep==2' (click)='SaveNewJob()'><ion-icon name="md-checkmark-circle-outline"></ion-icon>{{actionText}}</button>
+</ion-footer>

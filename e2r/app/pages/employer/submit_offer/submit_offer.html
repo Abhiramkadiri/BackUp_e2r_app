@@ -1,0 +1,79 @@
+<ion-header>
+    <ion-navbar navbar>
+        <ion-title>
+            Submit Offer
+        </ion-title>
+		<ion-buttons start class="close-left">
+				<button (click)="close()">
+						<span showWhen="ios">Cancel</span>
+						<ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+				</button>
+		</ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+   
+<ion-card class="submit-offer-list">
+    <ion-card-content>
+        <ion-list>
+                <ion-item>
+                    <p>Relocation</p>
+                    <span *ngIf='employee.relocation!=undefined'>{{employee.relocation}}</span>
+                    <span *ngIf='employee.relocation==undefined'>No details found.</span>
+                </ion-item>
+                <ion-item>
+                    <p>Desired Salary</p>
+                    <span *ngIf='employee.desired_salary!=undefined'>{{employee.desired_salary.amount}}/ Annum <span class="currency">({{employee.desired_salary.currency}})</span></span>                
+                    <span *ngIf='employee.desired_salary==undefined'>No details found.</span>                
+                </ion-item>
+                <ion-item *ngIf='!item.offers'>        
+                    <p>Bids</p>
+                    <span class="bidcount">No bids found</span>
+                </ion-item>
+                <ion-item *ngIf='item.offers'>        
+                    <p>No of Bids</p>
+                    <span *ngIf='item.offers' class="bidcount">{{item.offers.length}} <span (click)='openBidHistory()'>[View Bids]</span></span>
+                    <span *ngIf='!item.offers' class="bidcount">0</span>
+                </ion-item>
+                <ion-item class="nobb" *ngIf='item.offers'>
+                    <p>Last Bid</p>
+                    <span *ngIf='item.offers'>{{LastBid.offer_amount}} / Annum <span class="currency">({{LastBid.offer_currency}})</span></span>
+                     <span *ngIf='!item.offers' class="bidcount">No details found.</span>                
+                </ion-item>
+                <h3 class="offer-info">Offer Information</h3>
+                <ion-item>
+                     <ion-label>Your Offer</ion-label>
+                     <ion-input type='number' [(ngModel)]='myOffer.amount' (ngModelChange)='canSubmitOffer()' placeholder='Enter offer amount'></ion-input>
+                    <ion-select [(ngModel)]="myOffer.currency">
+                      <ion-option *ngFor='let currency of currencyList' [value]="currency.name" selected>{{currency.name}}</ion-option>
+                      <!--<ion-option [value]="USD">USD</ion-option>-->
+                    </ion-select>
+                </ion-item> 
+                <ion-item>
+                     <ion-label>Valid Through</ion-label>
+                    <ion-datetime displayFormat="DD/MM/YYYY" min='{{minDate}}' [(ngModel)]='myOffer.expiry'></ion-datetime>
+                </ion-item> 
+                <ion-item class="job-description">
+                    <p>Job Description</p>
+                    <p>{{htmlToPlaintext(item.job.job_description)}}</p>
+                </ion-item>
+                <ion-item *ngIf='item.job.job_descriptionUrl!=undefined && item.job.job_descriptionUrl!=null'>
+                     <a  download="" target="_blank" href="{{item.job.job_descriptionUrl}}">Click here to download job description</a>
+                </ion-item>
+            </ion-list>
+    </ion-card-content>
+</ion-card>
+
+</ion-content>
+<ion-footer>
+     <button full [disabled]='canSubmit' (click)='onSubmitOffer()'> <ion-icon name="md-download" ></ion-icon> &nbsp;&nbsp;Submit Offer</button>
+</ion-footer>
+
+<!--<ion-toolbar position="bottom" class="submit-offer-but">
+    <button full>
+        <ion-item>
+            <ion-icon name="md-send" item-left></ion-icon>
+            Submit Offer
+        </ion-item>
+    </button>
+</ion-toolbar>-->

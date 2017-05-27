@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            Shortlisted
+        </ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+        <!--<ion-searchbar class="search-result"></ion-searchbar>-->
+        <ion-searchbar [(ngModel)]="searchTerm" (ionInput)='onSearch($event)' placeholder="Enter Name or Email address..."></ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="shortlisted">
+    <ion-card class="offersToReview" (click)="onShowShortedEmployee(list_item,list_index)" *ngFor="let list_item of shorted_list; let list_index=index">
+        <ion-item>
+            <ion-avatar item-left>
+                <img *ngIf="list_item.employee.profile_pictureUrl!=undefined && list_item.employee.profile_pictureUrl!='' " src="{{list_item.employee.profile_pictureUrl}}">
+                <img *ngIf="list_item.employee.profile_pictureUrl==undefined || list_item.employee.profile_pictureUrl=='' " src="img/user.jpg">
+            </ion-avatar>
+            <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
+            <h2>{{list_item.employee.firstname}} {{list_item.employee.lastname}}</h2>
+            <p>{{list_item.employee.desired_job_type}}</p>
+            <p>{{list_item.employee.preffered_job_status}}</p>
+        </ion-item>
+    </ion-card>
+    <div class="nodatafound" *ngIf='shorted_list.length==0'>
+        <img src="img/nodatafound.png"/>
+          <p>No data found!!!</p>
+    </div>
+</ion-content>

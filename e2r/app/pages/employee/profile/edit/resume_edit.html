@@ -1,0 +1,27 @@
+
+<ion-header>
+    <ion-navbar navbar>
+        <ion-title>Resume</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+<div class="DocumntUpload">
+    <ion-row>
+        <ion-col width-80>
+            <input type="file" id="document" class="file-input" style="padding-top:8px">
+        </ion-col>
+        <ion-col width-20>
+            <ion-icon name="md-cloud-upload" (click)="uploadDocument()" style="font-size: 40px; color:#3A5E90"></ion-icon>
+        </ion-col>
+    </ion-row>
+</div>
+<list *ngIf='userData.resumeUrl!=undefined && userData.resumeUrl!=""'>
+    <ion-item>
+        <p>
+            <span><a (click)='viewResume()'>Resume</a></span>
+            <!--<ion-icon class='pull-right' name='md-trash' (click)='deleteResume()'></ion-icon>-->
+        </p>
+    </ion-item>
+</list>   
+<div *ngIf='userData.resumeUrl==undefined && userData.resumeUrl==""'>No resume found.</div>     
+</ion-content> 

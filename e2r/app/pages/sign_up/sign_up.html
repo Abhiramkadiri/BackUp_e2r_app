@@ -1,0 +1,166 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Sign Up</ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-segment>
+            <ion-segment-button secondary class="tabsNavigations segment-activated" value="Employee" (click)="signupType('1')">
+                Employee
+            </ion-segment-button>
+            <ion-segment-button secondary class="tabsNavigations" value="Employer" (click)="signupType('2')">
+                Employer
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding class="signup">
+    <!--<p class="text-center"><img src="img/e2r_Logo.png" alt="logo"/></p>-->
+
+    <div padding class="loginSignupContainer">
+
+        <!--<p class="text-center"><img src="img/e2r_LogoMain.png" alt="logo"/></p>-->
+
+        <form (ngSubmit)="onSignup(signupInputs)" #signupForm="ngForm" *ngIf="userType =='2'">
+            <ion-list>
+                <ion-item class="bTopNone">
+                    <ion-label floating>Company name</ion-label>
+                    <ion-input type="text" required [(ngModel)]="signupInputs.companyName" ngControl="companyName" #companyName="ngForm"></ion-input>
+                </ion-item>
+
+                <div class="invalid" [hidden]="companyName.valid || companyName.pristine">
+                    Enter company name
+                </div>
+
+                <ion-item>
+                    <ion-label floating>Company Location</ion-label>
+                    <ion-input type="text" required [(ngModel)]="signupInputs.companyLocation" ngControl="companyLocation" #companyLocation="ngForm"></ion-input>
+                </ion-item>
+
+                <div class="invalid" [hidden]="companyLocation.valid || companyLocation.pristine">
+                    Enter location
+                </div>
+
+                <ion-item class="mt20">
+                    <ion-label stacked>Industry</ion-label>
+                    <ion-select [(ngModel)]="signupInputs.companyIndustry" required ngControl="companyIndustry" #companyIndustry="ngForm">
+                        <ion-option *ngFor="let industry of industry_list" value="{{industry.name}}">{{industry.name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+                <div class="invalid" [hidden]="companyIndustry.valid || companyIndustry.pristine">
+                    Choose Industry
+                </div>
+                <ion-item>
+                    <ion-label floating>Email</ion-label>
+                    <ion-input type="email" required [(ngModel)]="signupInputs.email" ngControl="email" #email="ngForm"></ion-input>
+                </ion-item>
+                <div class="invalid" [hidden]="email.valid || email.pristine || email.pattern">
+                    Enter valid email
+                </div>
+                <ion-item>
+                    <ion-label floating>Phone</ion-label>
+                    <ion-input type="number" required [(ngModel)]="signupInputs.phone.mobile" ngControl="companyPhone" #companyPhone="ngForm"></ion-input>
+                </ion-item>
+                <div class="invalid" [hidden]="companyPhone.valid || companyPhone.pristine">
+                    Enter phone number
+                </div>
+                <ion-item>
+                    <ion-label floating>Password</ion-label>
+                    <ion-label class="txtIconRight">
+                        <ion-icon class="iconShowHide" name="eye" [hidden]="passwordShow" (click)="passwordEye()"></ion-icon>
+                        <ion-icon class="iconShowHide" name="eye-off" [hidden]="!passwordShow" (click)="passwordEye()"></ion-icon>
+                    </ion-label>
+                    <ion-input type="password" required [(ngModel)]="signupInputs.password" ngControl="password" #password="ngForm">
+                    </ion-input>
+                </ion-item>
+
+                <div class="invalid" [hidden]="password.valid || password.pristine || password.pattern">
+                    Enter password with valid pattern
+                </div>
+                <ion-item>
+                    <ion-label floating>Confirm Password</ion-label>
+                    <ion-label class="txtIconRight">
+                    </ion-label>
+                    <ion-input type="password" required [(ngModel)]="signupInputs.confirmPassword" ngControl="confirmPassword" #confirmPassword="ngForm"></ion-input>
+                </ion-item>
+
+                <div class="invalid" [hidden]="confirmPassword.valid || confirmPassword.pristine">
+                    Enter confirm password
+                </div>
+                <ion-row>
+                    <div id="grcaptcha2"></div>
+                </ion-row>
+            </ion-list>
+            <button type="submit" block class="btn btn-default" [disabled]="!signupForm.form.valid">Sign up</button>
+        </form>
+        <form (ngSubmit)="onSignup(signupInputs)" #signupForm="ngForm" *ngIf="userType =='1'">
+            <ion-list>
+                <ion-item class="bTopNone">
+                    <ion-label floating>First name</ion-label>
+                    <ion-input type="text" required [(ngModel)]="signupInputs.firstName" ngControl="firstName" #firstName="ngForm"></ion-input>
+                </ion-item>
+
+                <div class="invalid" [hidden]="firstName.valid || firstName.pristine">
+                    Enter Firstname
+                </div>
+
+                <ion-item>
+                    <ion-label floating>Last Name</ion-label>
+                    <ion-input type="text" required [(ngModel)]="signupInputs.lastName" ngControl="lastName" #lastName="ngForm"></ion-input>
+                </ion-item>
+
+                <div class="invalid" [hidden]="lastName.valid || lastName.pristine">
+                    Enter Lastname
+                </div>
+
+                <ion-item>
+                    <ion-label floating>Email</ion-label>
+                    <ion-input type="email" required [(ngModel)]="signupInputs.email" ngControl="email" #email="ngForm" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"></ion-input>
+                </ion-item>
+                <div class="invalid" [hidden]="email.valid || email.pristine || email.pattern">
+                    Enter valid email
+                </div>
+                <ion-item>
+                    <ion-label floating>Password</ion-label>
+                    <ion-label class="txtIconRight">
+                        <ion-icon class="iconShowHide" name="eye" [hidden]="passwordShow" (click)="passwordEye()"></ion-icon>
+                        <ion-icon class="iconShowHide" name="eye-off" [hidden]="!passwordShow" (click)="passwordEye()"></ion-icon>
+                    </ion-label>
+                    <ion-input type="password" required [(ngModel)]="signupInputs.password" ngControl="password" #password="ngForm">
+                    </ion-input>
+                </ion-item>
+                <div class="invalid" [hidden]="password.valid || password.pristine || password.pattern">
+                    <span>Enter password with valid pattern(1 uppercase, 1 lowercase, minimum 8 characters, 1 digit)</span>
+                </div>
+                <ion-item>
+                    <ion-label floating>Confirm Password</ion-label>
+                    <ion-label class="txtIconRight">
+                    </ion-label>
+                    <ion-input type="password" required [(ngModel)]="signupInputs.confirmPassword" ngControl="confirmPassword" #confirmPassword="ngForm"></ion-input>
+                </ion-item>
+
+                <div class="invalid" [hidden]="confirmPassword.valid || confirmPassword.pristine">
+                    Enter confirm password
+                </div>
+                <div>
+                <ion-item class="mt20">
+                    <ion-label>Currency</ion-label>
+                    <ion-select (ionChange)="onCurrencySel(signupInputs.desired_salary.currency)" [(ngModel)]="signupInputs.desired_salary.currency">
+                        <ion-option *ngFor="let currencyItem of currencyList; let i=index">{{currencyItem.name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+                <div class="text-center mt20 desiredsalary"><span>Desired Salary:</span> {{signupInputs.desired_salary.amount | currency:signupInputs.desired_salary.currency:true:'1.2-2'}}</div>
+                <ion-range min="{{salRange.minSal}}" max="{{salRange.maxSal}}" step="{{salRange.salInc}}" color="primary" [(ngModel)]="signupInputs.desired_salary.amount"></ion-range>
+                   
+
+                   
+                </div>
+                <ion-row>
+                    <div id="grcaptcha1"></div>
+                </ion-row>
+            </ion-list>
+            <button type="submit" block class="btn btn-default" [disabled]="!signupForm.form.valid">Sign up</button>
+        </form>
+        <p class="text-center termsCondition">By clicking Sign Up, you agree to our<br/>
+            <strong class="greencolor" (click)="openTerms()">TERMS OF SERVICE AND DATA POLICY</strong></p>
+    </div>
+</ion-content>

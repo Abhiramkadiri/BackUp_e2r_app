@@ -1,0 +1,50 @@
+<ion-header>
+
+    <ion-toolbar>
+        <ion-title>
+            Overview
+        </ion-title>
+        <ion-buttons start>
+            <button (click)="dismiss($event)">
+                <span showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="companyProfile">
+    <div  class="company-basic-edit" *ngIf="edit">
+        <ion-list class="editForms mb0">
+            <ion-item>
+                <ion-label stacked>Overview</ion-label>
+                <ion-textarea [(ngModel)]="overviewInputs.overview"></ion-textarea>
+            </ion-item>
+        </ion-list>
+    </div>
+    <div *ngIf="show">
+         <ion-card *ngIf="overviewInputs.overview">
+            <ion-card-content >
+                {{overviewInputs.overview}}
+            </ion-card-content>
+          </ion-card>
+          <!--<ion-card-content  *ngIf="!overviewInputs.overview && is_owner" (click)="addField()">
+              <button full class="btnsave">
+                [+] Add Overview
+              </button>
+          </ion-card-content> -->
+          <div class="nodatafound" *ngIf="!overviewInputs.overview">
+             <ion-icon name="ios-information-circle-outline"></ion-icon>
+             No Data Found...
+          </div>  
+    </div>
+</ion-content>
+
+
+<ion-footer *ngIf="is_owner" class="footerbtn common-edit">
+  <button fab fab-right fab-bottom class="fixedBottom" (click)="enable()" *ngIf="!edit">
+    <ion-icon name="md-create"></ion-icon>
+  </button>
+  <button type="button" full class="btn btn-default btnsave" (click)="saveoverviewEdit(overviewInputs)" *ngIf="edit"><ion-icon name="md-checkmark"></ion-icon> Save</button>
+</ion-footer>

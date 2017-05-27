@@ -1,0 +1,34 @@
+.jobs-list {
+    .fixedBottom {
+        position: fixed;
+        background: #446fa8;
+    }
+    .jobs-page {
+        h2 {
+            margin-bottom: 7px; 
+        }
+        p {
+            font-size: 14px;
+            line-height: 22px;
+            position: relative;
+            padding-left: 25px;
+            ion-icon {
+                position: absolute;
+                left: 0;
+                top: 2px;
+            }
+        }
+        .editjobs {
+            color:#428bca; 
+        }
+    }
+}
+ion-searchbar.search-result {
+    .searchbar-ios-cancel {
+        color: $white;
+        opacity: 0.9;
+    }
+    .searchbar-input {
+        background: $white;
+    }
+} 

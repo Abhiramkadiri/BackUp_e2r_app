@@ -1,0 +1,62 @@
+.login-page, .sign-up-page, .profile-page, .view-offer-page, .skills-edit-page, .education-edit-page, .experience-edit-page, .supporting-docs-edit-page, 
+.summary-edit-page, .add-skill-page, .bio-edit-page, .add-education-page, .add-experience-page, .basic-edit-page, .company-profile-page {
+
+	.toolbar-background {
+		background-color:$appTopbar;
+	}
+
+	.subheader {
+		.toolbar-background {
+			background-color:#474A55;
+		}
+	}
+	.bar-button-default, .toolbar-title {
+		color: $white;
+	}
+
+}
+.invalid {
+	color: $red;
+	padding-top: 10px;
+}
+.login, .signup {
+	background-image: url("../../img/bg2.jpg");
+    background-size: cover;
+}
+.loginSignupContainer {
+	background-color: $white;
+
+	.ng-invalid.ng-touched::after {
+		left: 0 !important;
+	}
+
+	
+}
+
+// android
+.platform-android {
+
+	.tabsNavigations.segment-button {
+		color: $white;
+	}
+	.tabsNavigations.segment-activated {
+		border-color:$logoColor;
+	}
+}
+
+//ios
+.platform-ios {
+
+	.tabsNavigations.segment-button {
+		border-color:$logoColor;
+		color: $logoColor;
+	}
+	.tabsNavigations.segment-activated {
+		background-color:$logoColor;
+		color: #444;
+	}
+}
+
+
+
+.login .item, .signup .item { padding-left: 0;}

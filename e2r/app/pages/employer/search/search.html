@@ -1,0 +1,175 @@
+<ion-header>
+  <ion-navbar navbar>
+    <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>  
+    <ion-title>
+      Search Candidates
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-searchbar class="search-result" [(ngModel)]="search_text" (ngModelChange)="onSearchEmployee()" placeholder="Enter Skills, Location, Role, Education"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="searchResult search-page">
+   <ion-segment class="popupSubheader">
+    <p class="resultCount text-center" *ngIf="employees_list.length > 0">{{employees_list.length}} Matches found for your search criteria</p>
+    <p class="resultCount text-center" *ngIf="employees_list.length == 0">No results found</p>
+   </ion-segment>
+
+  <ion-card *ngFor="let employee of employees_list"> 
+    <ion-card-header class="searchResultCard {{getStatusHighLight()}}">
+      <ion-item>
+        <ion-avatar item-left>
+          <img *ngIf="employee.profile_pictureUrl!=undefined && employee.profile_pictureUrl!=''" src="{{employee.profile_pictureUrl}}">
+          <img *ngIf="employee.profile_pictureUrl==undefined || employee.profile_pictureUrl==''" src="img/user.jpg">
+        </ion-avatar>
+        <h2>{{employee.firstname}} {{employee.lastname}}</h2>
+        <p *ngIf="employee.desired_job_type!=undefined">{{employee.desired_job_type}}</p>
+        <ion-icon item-right name="md-star-outline" (click)='ShortListCandidate(employee)'></ion-icon>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Current Company: </strong> {{getCurrentCompany(employee.experience)}}</p>
+      <p><strong>Current Location :</strong> {{employee.current_location}}</p>
+      <p><strong>Relocation :</strong> {{employee.relocation}}</p>
+      <p><strong>Years of Experience :</strong> {{employee.total_experience}}</p>
+      <p *ngIf="employee.desired_salary!=undefined"><strong>Desired Salary :</strong> {{employee.desired_salary.amount}} {{employee.desired_salary.currency}}</p>
+    </ion-card-content>
+    <ion-item class="serachCardFooter">
+      <button secondary clear item-right (click)="onShowEmployeeProfile(employee)">
+        <div>Review Profile</div>
+      </button>
+      <!--<button secondary clear item-right class="pull-right">
+        More
+        <ion-icon name="md-more"></ion-icon>
+      </button>-->
+    </ion-item>
+  </ion-card>
+  
+  <!--Green Zone // userProfessional -->
+  <!--<ion-card>
+    <ion-card-header class="searchResultCard userProfessional">
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="img/user.jpg">
+        </ion-avatar>
+        <h2>Ravinthranath</h2>
+        <p>SharePoint UX Consultant</p>
+        <ion-icon item-right name="md-star" class="starcolor"></ion-icon>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Current Company: </strong> KL Software Technologies</p>
+      <p><strong>Current Location :</strong> Chennai, Tamil Nadu</p>
+      <p><strong>Relocation :</strong> Yes</p>
+      <p><strong>Years of Experience :</strong> 5+ Years</p>
+      <p><strong>Desired Salary :</strong> 6 - 10 Lakhs/Annum</p>
+    </ion-card-content>
+    <ion-item class="serachCardFooter">
+      <button secondary clear item-left>
+        <div>Review Profile</div>
+      </button>
+      <button secondary clear item-right class="pull-right">
+        More
+        <ion-icon name="md-more"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-card>
+
+  <!--Blue Zone // userGood -->
+  <!--<ion-card>
+    <ion-card-header class="searchResultCard userGood">
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="img/user.jpg">
+        </ion-avatar>
+        <h2>Ravinthranath</h2>
+        <p>SharePoint UX Consultant</p>
+        <ion-icon item-right name="md-star-outline"></ion-icon>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Current Company: </strong> KL Software Technologies</p>
+      <p><strong>Current Location :</strong> Chennai, Tamil Nadu</p>
+      <p><strong>Relocation :</strong> Yes</p>
+      <p><strong>Years of Experience :</strong> 5+ Years</p>
+      <p><strong>Desired Salary :</strong> 6 - 10 Lakhs/Annum</p>
+    </ion-card-content>
+    <ion-item class="serachCardFooter">
+      <button secondary clear item-left>
+        <div>Review Profile</div>
+      </button>
+      <button secondary clear item-right class="pull-right">
+        More
+        <ion-icon name="md-more"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-card>
+
+  <!--Orange Zone // userAvg -->
+  <!--<ion-card>
+    <ion-card-header class="searchResultCard userAvg">
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="img/user.jpg">
+        </ion-avatar>
+        <h2>Ravinthranath</h2>
+        <p>SharePoint UX Consultant</p>
+        <ion-icon item-right name="md-star-outline"></ion-icon>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Current Company: </strong> KL Software Technologies</p>
+      <p><strong>Current Location :</strong> Chennai, Tamil Nadu</p>
+      <p><strong>Relocation :</strong> Yes</p>
+      <p><strong>Years of Experience :</strong> 5+ Years</p>
+      <p><strong>Desired Salary :</strong> 6 - 10 Lakhs/Annum</p>
+    </ion-card-content>
+    <ion-item class="serachCardFooter">
+      <button secondary clear item-left>
+        <div>Review Profile</div>
+      </button>
+      <button secondary clear item-right class="pull-right">
+        More
+        <ion-icon name="md-more"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-card>
+
+  <!--Red Zone // userPoor -->
+  <!--<ion-card>
+    <ion-card-header class="searchResultCard userPoor">
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="img/user.jpg">
+        </ion-avatar>
+        <h2>Ravinthranath</h2>
+        <p>SharePoint UX Consultant</p>
+        <ion-icon item-right name="md-star-outline"></ion-icon>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Current Company: </strong> KL Software Technologies</p>
+      <p><strong>Current Location :</strong> Chennai, Tamil Nadu</p>
+      <p><strong>Relocation :</strong> Yes</p>
+      <p><strong>Years of Experience :</strong> 5+ Years</p>
+      <p><strong>Desired Salary :</strong> 6 - 10 Lakhs/Annum</p>
+    </ion-card-content>
+    <ion-item class="serachCardFooter">
+      <button secondary clear item-left>
+        <div>Review Profile</div>
+      </button>
+      <button secondary clear item-right class="pull-right">
+        More
+        <ion-icon name="md-more"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-card>-->
+</ion-content>
+<ion-footer>
+  <button fab fab-center fab-bottom class="fixedBottom" [ngStyle]="{'background-color': isApplied}" (click)="openFilter()">
+    <ion-icon name="funnel"></ion-icon>
+  </button>
+</ion-footer>
+

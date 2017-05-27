@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            Company History
+        </ion-title>
+        <ion-buttons start>
+            <button (click)="dismiss($event)">
+                <span showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="companyProfile">
+
+    <div class="company-basic-edit" *ngIf="edit">
+        <ion-list class="editForms mb0">
+            <ion-item>
+                <ion-label stacked>Company History</ion-label>
+                <ion-textarea [(ngModel)]="historyInputs.company_history"></ion-textarea>
+            </ion-item>
+        </ion-list>
+    </div>
+
+    <div *ngIf="show">
+        <ion-card *ngIf="historyInputs.company_history">
+            <ion-card-content >
+                {{historyInputs.company_history}}
+            </ion-card-content>
+        </ion-card>
+        <div class="nodatafound" *ngIf="!historyInputs.company_history">
+             <ion-icon name="ios-information-circle-outline"></ion-icon>
+             No Data Found...
+        </div>
+    </div>
+</ion-content> 
+
+<ion-footer *ngIf="is_owner" class="footerbtn common-edit">
+  <button fab fab-right fab-bottom class="fixedBottom" (click)="enable()" *ngIf="!edit">
+    <ion-icon name="md-create"></ion-icon>
+  </button>
+   <button type="button" full class="btn btn-default btnsave" (click)="saveHistoryEdit(historyInputs)"  *ngIf="edit">  <ion-icon name="md-checkmark"></ion-icon> Save</button>
+</ion-footer>

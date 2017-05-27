@@ -1,0 +1,228 @@
+<ion-header>
+
+    <ion-navbar navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>        
+        <ion-title>
+            Shortlisted
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="shortlisted-profile">
+    <div class="profile">
+        <div class="profilefocus text-center">
+            <div class="avatar" light>
+                <img *ngIf="userData.profile_pictureUrl!=undefined && userData.profile_pictureUrl!='' " src="{{userData.profile_pictureUrl}}">
+                <img *ngIf="userData.profile_pictureUrl==undefined || userData.profile_pictureUrl=='' " src="img/user.jpg">
+            </div>
+            <h4 light>{{userData.firstname+' '+userData.lastname}}</h4>
+            <p light>{{setCurrCompany(userData.experience,'title')}}</p>
+        </div>
+    </div>
+    
+    <ion-row>
+        <ion-col width-50>
+            <button full class="review-profile" (click)='onReviewProfile()'>
+                <ion-icon name="md-list-box"></ion-icon>
+                Review Profile
+            </button>
+        </ion-col>
+        <ion-col width-50>
+            <button full class="remove-profile" (click)='onRemoveCandidate()'>
+                <ion-icon name="md-close"></ion-icon>
+                Remove
+            </button>
+        </ion-col>
+    </ion-row>
+    
+    <ion-card (click)="ratingPage()">
+        <ion-card-header class="cardHead">
+            Rating 
+            <span class="pull-right orangecolor" *ngIf='userData.rating!=undefined'>{{userData.rating}}/100</span>
+            <span class="pull-right orangecolor" *ngIf='userData.rating==undefined'>Not yet rated.</span>
+            <div class="cssProgress" *ngIf='userData.rating!=undefined'>
+                <div class="progress1">
+                    <div class="cssProgress-bar cssProgress-info cssProgress-stripes"  [ngStyle]="{'width':userData.rating+'%'}">
+                    </div>
+                </div>
+            </div>
+        </ion-card-header>
+        <ion-card-content >
+
+            <p class="ashcolor">Profile Strength: <strong>{{ProfileStrength}}</strong>
+                <!--<span class="pull-right moreInfo">  <ion-icon name="ios-arrow-forward"></ion-icon></span>-->
+            </p>
+        </ion-card-content>
+    </ion-card>
+    
+    <!-- Ravi Added -->
+    <ion-card class="basic">
+        <ion-card-header class="information">
+            <ion-icon name="information-circle"></ion-icon> &nbsp;&nbsp;Information
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item>
+                    <span *ngIf='userData.total_experience!=undefined'>{{userData.total_experience}}</span>
+                    <span  *ngIf='userData.total_experience==undefined'>No Details found!!!</span>
+                    <p>Years of Experience</p>
+                </ion-item>
+                <!--<ion-item>
+                    <span>Senior Executive</span>                
+                    <p>Career Level</p>
+                </ion-item>-->
+                <ion-item>
+                    <span *ngIf='userData.experience!=undefined'>{{setCurrCompany(userData.experience,'title')}}</span>                
+                    <span *ngIf='userData.experience==undefined'>No Details found!!!</span>                
+                    <p>Current Job Details</p>
+                </ion-item>                                            
+                <ion-item>
+                    <span *ngIf='userData.experience!=undefined'>{{setCurrCompany(userData.experience,'company_name')}}</span>                 
+                    <span *ngIf='userData.experience==undefined'>No Details found!!!</span>                 
+                    <p>Current Company</p>
+                </ion-item>
+                <ion-item>
+                    <span *ngIf='userData.experience!=undefined'>{{setCurrCompany(userData.experience,'location')}}</span>                
+                    <span *ngIf='userData.experience==undefined'>No Details found!!!</span>                
+                    <p>Current Location</p>
+                </ion-item>
+                <ion-item>
+                    <span *ngIf='userData.preffered_job_status!=undefined'>{{userData.preffered_job_status}}</span>                
+                    <span *ngIf='userData.preffered_job_status==undefined'>No Details found!!!</span>                
+                    <p>Job Type</p>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    
+    
+    <!--// Experience Infomation -->
+	<ion-card  class="basic">
+	  <ion-card-header class="information"> 
+          <ion-icon name="briefcase"></ion-icon> &nbsp;&nbsp;Experience Summary 
+	  </ion-card-header>
+	   <ion-card-content class="experience-info">
+            <ion-list >
+                <ion-item *ngFor='let exp of userData.experience'>
+                    <span>{{exp.title}}</span>
+                    <p>{{exp.company_name}}</p>
+                    <p class="time-peroid"><ion-icon name="md-time"></ion-icon>
+                        <span *ngIf='isTrue(exp)'>{{exp.from_month+' '+exp.from_year}}– Present ({{exp.worked_period+')'}}</span>
+                        <span *ngIf='!isTrue(exp)'>{{exp.from_month+' '+exp.from_year+'–'+exp.to_month+' '+exp.to_year}}</span>
+                    </p>
+                </ion-item>
+                <ion-item *ngIf='userData.experience==undefined'>
+                    No Details found!!!
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+	</ion-card>
+    <!-- // Ravi Added -->
+
+
+    
+    <!--<ion-list>
+        <ion-row (click)="skillShow()" class="accordianrow">
+            <ion-col width-90><strong>Rating Based on Skills</strong></ion-col>
+            <ion-col width-10>
+                <ion-icon name="add-circle" *ngIf="!skill"></ion-icon>
+                <ion-icon name="remove" *ngIf="skill"></ion-icon>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="skill">
+            <ion-item>HTML 74/100</ion-item>
+            <ion-item>CSS 75/100</ion-item>
+            <ion-item>UI/UX 80/100</ion-item>
+        </div>
+        <ion-row (click)="offerShow()" class="accordianrow">
+            <ion-col width-90><strong>Offer Section</strong></ion-col>
+            <ion-col width-10>
+                <ion-icon name="add-circle" *ngIf="!offer"></ion-icon>
+                <ion-icon name="remove" *ngIf="offer"></ion-icon>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="offer">
+            <ion-item><strong>Relocation</strong>
+                <p>Yes</p>
+            </ion-item>
+            <ion-item><strong>Desired Salary</strong>
+                <p>6-10 Lakhs</p>
+            </ion-item>
+            <ion-item (click)="openBidHistory()"><strong>Number of companies currently bidding 3</strong>
+                <p>View Bids</p>
+            </ion-item>
+            <ion-item><strong>Last Bid (Rs.)</strong>
+                <p>7.5 Lakhs / Annum</p>
+            </ion-item>
+            <ion-item>
+                <ion-label>Your Offer (Rs.)</ion-label>
+                <ion-select [(ngModel)]="gaming">
+                    <ion-option value="nes">8 Laks/Annum</ion-option>
+                    <ion-option value="n64">10 Laks/Annum</ion-option>
+                    <ion-option value="ps">12 Laks/Annum</ion-option>
+                    <ion-option value="genesis">14 Laks/Annum</ion-option>
+                    <ion-option value="saturn">18 Laks/Annum</ion-option>
+                    <ion-option value="snes">25 Laks/Annum</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Job Description</ion-label>
+                <ion-textarea></ion-textarea>
+            </ion-item>
+            <button type="submit" block class="btn btn-default padding">Submit Offer</button>
+        </div>
+        <ion-row (click)="experienceShow()" class="accordianrow">
+            <ion-col width-90><strong>Experience</strong></ion-col>
+            <ion-col width-10>
+                <ion-icon name="add-circle" *ngIf="!experience"></ion-icon>
+                <ion-icon name="remove" *ngIf="experience"></ion-icon>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="experience">
+            <ion-item><strong>Years of Experience </strong>
+                <p>5+ Years</p>
+            </ion-item>
+            <ion-item><strong>Career Level</strong>
+                <p>Senior Executive</p>
+            </ion-item>
+            <ion-item><strong>Current Job Details</strong>
+                <p>SharePoint UX Consultant</p>
+            </ion-item>
+            <ion-item><strong>Current Company</strong>
+                <p>KL Software Technologies</p>
+            </ion-item>
+            <ion-item><strong>Current Location</strong>
+                <p>Chennai, Tamil Nadu</p>
+            </ion-item>
+            <ion-item><strong>Job Type</strong>
+                <p>Full Time</p>
+            </ion-item>
+        </div>
+        <ion-row (click)="experiencesummaryShow()" class="accordianrow">
+            <ion-col width-90><strong>Experience Summary</strong></ion-col>
+            <ion-col width-10>
+                <ion-icon name="add-circle" *ngIf="!experienceSummary"></ion-icon>
+                <ion-icon name="remove" *ngIf="experienceSummary"></ion-icon>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="experienceSummary" padding>
+            <p>Sharepoint UX Consultant : KL Software Technologies December 2013 – Present (6 months)</p>
+            <p>Freelancer: Freelance / Graphic Design, Brand Development, Web Design and UI Design January 2013 – November 2013 (11 months)</p>
+            <p>UI Designer : Allerin Tech Pvt Ltd September 2012 – December 2012 (4 months)</p>
+            <p>Web / Graphic Designer, Server Administrator Aarkstore Enterprise August 2008 – July 2012 (4 years)</p>
+        </div>
+    </ion-list>-->
+
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar class="submit-offer-but">
+        <button full (click) = "submitoffer()">
+                Submit Offer &nbsp;&nbsp;
+                <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </button>
+    </ion-toolbar>
+</ion-footer>

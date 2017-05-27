@@ -1,0 +1,291 @@
+<ion-header>
+    <ion-navbar navbar>
+        <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>
+            Profile
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<!-- Company Profile Information -->
+<ion-content class="companyProfile">
+
+    <div class="company-profile-bg" [ngStyle]="teamPicture">
+        <div class="overlay"></div>
+    </div>
+    <!--<div class="company-profile-bg" *ngIf="userData.team_pictureUrl!=undefined && userData.team_pictureUrl!=''" [ngStyle]="{'background-image':'url('+getTeamImage(userData.team_pictureUrl)+')'}">
+  <div class="overlay"></div>
+</div>
+<div class="company-profile-bg" *ngIf="userData.team_pictureUrl==undefined || userData.team_pictureUrl==''" [ngStyle]="{'background-image':'url(img/team.jpg)'}">
+  <div class="overlay"></div>
+</div>-->
+    <!-- profile Information -->
+    <div class="company-profile-main">
+        <div class="text-center" (click)="openbasic()">
+            <div class="avatar overflow whitebg">
+                <img src="{{profilePicture}}" />
+                <!--<img *ngIf="userData.profile_pictureUrl != undefined && userData.profile_pictureUrl != ''" src="{{userData.profile_pictureUrl}}" />-->
+                <!--<img *ngIf="userData.profile_pictureUrl == undefined || userData.profile_pictureUrl == ''" src="img/user.jpg" />-->
+            </div>
+            <h4 *ngIf="userData.name">{{userData.name}}</h4>
+            <h4 *ngIf="!userData.name">Add Name</h4>
+            <p *ngIf="userData.location">
+                <ion-icon name="pin"></ion-icon> {{userData.location}}</p>
+            <p *ngIf="!userData.location">
+                <ion-icon name="pin"></ion-icon> Add Location</p>
+        </div>
+    </div>
+    <!-- // profile Information -->
+
+    <!--  Specialities // -->
+    <ion-card class="specialities">
+        <ion-card-header class="bb">Specialties
+            <button *ngIf="!is_employee" class="pull-right bediticon" (click)="openSpecialistedit()"><ion-icon name="md-create"></ion-icon></button>
+        </ion-card-header>
+        <ion-card-content class="pT10 summary_info">
+            <p *ngIf="userData.summary_specialities">{{userData.summary_specialities}}</p>
+            <h2 *ngIf="!userData.summary_specialities && !is_employee" (click)="openSpecialistedit()" class="add-field">[+] Add Specialities Summary</h2>
+        </ion-card-content>
+        <ion-card-content class="bt">
+            <ion-list no-lines class="pl0">
+                <ion-item>
+                    <h2 *ngIf="userData.industry">{{userData.industry}}</h2>
+                    <h2 *ngIf="!userData.industry && !is_employee" class="add-field" (click)="openSpecialistedit()">[+] Add Industry</h2>
+                    <p>Industry</p>
+                </ion-item>
+
+                <ion-item>
+                    <h2 *ngIf="userData.company_type">{{userData.company_type}}</h2>
+                    <h2 *ngIf="!userData.company_type  && !is_employee" (click)="openSpecialistedit()" class="add-field">[+] Add Type</h2>
+                    <p>Type</p>
+                </ion-item>
+
+                <ion-item>
+                    <h2 *ngIf="userData.company_size">{{userData.company_size}}</h2>
+                    <h2 *ngIf="!userData.company_size  && !is_employee" (click)="openSpecialistedit()" class="add-field">[+] Add Company Size</h2>
+                    <p>Company Size</p>
+                </ion-item>
+
+                <ion-item>
+                    <h2 *ngIf="userData.founded">{{userData.founded}}</h2>
+                    <h2 *ngIf="!userData.founded  && !is_employee" (click)="openSpecialistedit()" class="add-field">[+] Add Founded</h2>
+                    <p>Founded</p>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="contact">
+        <ion-card-header class="bb">Contact
+            <button *ngIf="!is_employee" class="pull-right bediticon" (click)="openContactinfoedit()"><ion-icon name="md-create"></ion-icon></button>
+        </ion-card-header>
+        <ion-card-content>
+
+            <ion-list class="contactInfo pl0">
+
+                <ion-item>
+                    <ion-icon name="md-call" item-left></ion-icon>
+                    <h2 *ngIf="userData.phone">
+                        <!--{{userData.phone.mobile}}-->
+                        <span *ngIf='userData.phone.mobile!=undefined'>{{userData.phone.mobile}}</span>
+                        <span *ngIf='userData.phone.mobile==undefined && userData.phone.home!=undefined'>{{userData.phone.home}}</span>
+                        <span *ngIf='userData.phone.mobile==undefined && userData.phone.home==undefined && userData.phone.work!=undefined'>{{userData.phone.work}}</span>
+                    </h2>
+                    <h2  class="add-field" *ngIf="!userData.phone  && !is_employee" (click)="openContactinfoedit()">[+] Add Phone</h2>
+                    <p>Phone</p>
+                    <!--<p *ngIf="userData.phone">{{userData.phone.mobile}}</p>
+                    <p *ngIf="!userData.phone" (click)="openContactinfoedit()">Add Phone</p>-->
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="logo-linkedin" item-left></ion-icon>
+
+                    <h2 *ngIf="userData.linkedin">{{userData.linkedin}}</h2>
+                    <h2  class="add-field" *ngIf="!userData.linkedin  && !is_employee" (click)="openContactinfoedit()">[+] Add Profile</h2>
+                    <p>Your Profile</p>
+                    <!--Your Profile
+                    <p *ngIf="userData.linkedin">{{userData.linkedin}}</p>
+                    <p *ngIf="!userData.linkedin" (click)="openContactinfoedit()">Add Profile</p>-->
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="md-mail" item-left></ion-icon>
+                    <h2 *ngIf="userData.email">{{userData.email}}</h2>
+                    <h2  class="add-field" *ngIf="!userData.email  && !is_employee" (click)="openContactinfoedit()">[+] Add Email</h2>
+                    <p>Email</p>
+                    <!--Email
+                    <p *ngIf="userData.email">{{userData.email}}</p>
+                    <p *ngIf="!userData.email" (click)="openContactinfoedit()">Add Email</p>-->
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="globe" item-left></ion-icon>
+                    <h2 *ngIf="userData.portal">{{userData.portal}}</h2>
+                    <h2  class="add-field" *ngIf="!userData.portal  && !is_employee" (click)="openContactinfoedit()">[+] Add Website</h2>
+                    <p>Website</p>
+                    <!--Website
+                    <p *ngIf="userData.portal">{{userData.portal}}</p>
+                    <p *ngIf="!userData.portal" (click)="openContactinfoedit()">Add Website</p>-->
+                </ion-item>
+
+            </ion-list>
+
+        </ion-card-content>
+    </ion-card>
+
+    <!-- Contact Persion -->
+
+    <ion-card class="contact">
+        <ion-card-header class="bb">Contact Person
+            <button *ngIf="!is_employee" class="pull-right bediticon" (click)="openContactPersonEdit()"><ion-icon name="md-create"></ion-icon></button>
+        </ion-card-header>
+        <ion-card-content>
+
+            <ion-list class="contactInfo pl0">
+                <ion-item>
+                    <ion-icon name="md-person" item-left></ion-icon>
+                    <h2 *ngIf="userData.contact_person!=undefined && userData.contact_person.name!=undefined && userData.contact_person.name!=''">{{userData.contact_person.name}}</h2>
+                    <h2  class="add-field" *ngIf="!is_employee &&(userData.contact_person==undfined || userData.contact_person.name==undefined || userData.contact_person.name=='')" (click)="openContactPersonEdit()">[+] Add Contat Persion's Name</h2>
+                    <p>Name</p>
+                    <!--Name
+                    <p *ngIf="userData.contact_person!=undefined && userData.contact_person.name!=undefined && userData.contact_person.name!=''">{{userData.contact_person.name}}</p>
+                    <p *ngIf="userData.contact_person==undfined || userData.contact_person.name==undefined || userData.contact_person.name==''" (click)="openContactPersonEdit()">Add Contat Persion Name</p>-->
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="md-call" item-left></ion-icon>
+                    <h2 *ngIf="userData.contact_person!=undefined && userData.contact_person.contact_number!=undefined && userData.contact_person.contact_number!=''">{{userData.contact_person.contact_number}}</h2>
+                    <h2  class="add-field" *ngIf="!is_employee && (userData.contact_person==undfined || userData.contact_person.contact_number==undefined || userData.contact_person.contact_number=='')" (click)="openContactPersonEdit()">[+] Add Contat Persion's Number</h2>
+                    <p>Contact Number</p>
+                    <!--Contact Number
+                    <p *ngIf="userData.contact_person!=undefined && userData.contact_person.contact_number!=undefined && userData.contact_person.contact_number!=''">{{userData.contact_person.contact_number}}</p>
+                    <p *ngIf="userData.contact_person==undfined || userData.contact_person.contact_number==undefined || userData.contact_person.contact_number==''" (click)="openContactPersonEdit()">Add Contat Persion Contact Number</p>-->
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="md-mail" item-left></ion-icon>
+                     <h2  *ngIf="userData.contact_person!=undefined && userData.contact_person.email!=undefined && userData.contact_person.email!=''">{{userData.contact_person.email}}</h2>
+                    <h2  class="add-field"  *ngIf="!is_employee && (userData.contact_person==undfined || userData.contact_person.email==undefined || userData.contact_person.email=='')" (click)="openContactPersonEdit()">[+] Add Contat Persion's Email</h2>
+                    <p>Email Address</p>
+                    <!--Email
+                    <p *ngIf="userData.contact_person!=undefined && userData.contact_person.email!=undefined && userData.contact_person.email!=''">{{userData.contact_person.email}}</p>
+                    <p *ngIf="userData.contact_person==undfined || userData.contact_person.email==undefined || userData.contact_person.email==''" (click)="openContactPersonEdit()">Add Contat Persion Email</p>-->
+                </ion-item>
+            </ion-list>
+
+        </ion-card-content>
+    </ion-card>
+
+
+    <!--  Company History // -->
+    <ion-card (click)="openCompanyHistory()">
+        <ion-card-header class="bb">Company History
+            <ion-icon class="pull-right" name="arrow-forward"></ion-icon>
+        </ion-card-header>
+    </ion-card>
+
+    <!--  CEO's Vision // -->
+    <ion-card (click)="openCeoVision()">
+        <ion-card-header class="bb">CEO's Vision
+            <ion-icon class="pull-right" name="arrow-forward"></ion-icon>
+        </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header class="bb"><strong>About</strong>
+
+        </ion-card-header>
+        <ion-list>
+            <button ion-item (click)="openOverview()">
+	      <ion-icon name="ios-arrow-forward" showWhen="android,windows" item-right></ion-icon>
+	      Overview
+	    </button>
+
+            <button ion-item (click)="openbenefits()">
+	    	<ion-icon name="ios-arrow-forward" showWhen="android,windows" item-right></ion-icon>
+	      	Benefits
+	    </button>
+
+            <button ion-item (click)="openotherbenefits()">
+	    	<ion-icon name="ios-arrow-forward" showWhen="android,windows" item-right></ion-icon>
+	     	Other Benefits 
+	    </button>
+
+            <button ion-item (click)="openvacationpolicy()">
+	    	<ion-icon name="ios-arrow-forward" showWhen="android,windows" item-right></ion-icon>
+	      	Vacation Policy
+	    </button>
+
+            <button ion-item (click)="opencompanyperks()">
+	    	<ion-icon name="ios-arrow-forward" showWhen="android,windows" item-right></ion-icon>
+	      	Company Perks
+	    </button>
+
+            <button ion-item (click)="openstackholder()">
+	    	<ion-icon name="ios-arrow-forward" showWhen="android,windows" item-right></ion-icon>
+	      	Stakeholders
+	    </button>
+
+            <button ion-item (click)="openfundingtype()">
+	    	<ion-icon name="ios-arrow-forward" showWhen="android,windows" item-right></ion-icon>
+	      	Funding Type
+	    </button>
+        </ion-list>
+    </ion-card>
+
+    <!-- Video Infomation -->
+    <ion-card class="contact">
+        <ion-card-header class="bb">Video
+            <button *ngIf="!is_employee" class="pull-right bediticon" (click)="openVideoEdit()"><ion-icon name="md-create"></ion-icon></button>
+        </ion-card-header>
+
+        <ion-card-content class="employervideo" *ngIf="userData.profile_video!=undefined && userData.profile_video!=''">
+            <div class="videoios" showWhen="ios">
+                <ion-icon name="logo-youtube" (click)='openYouTube(userData.profile_video)'></ion-icon>
+                <div>Tap on play button to view video</div>
+            </div>
+            <div class="video-container" showWhen="android,windows">
+                <iframe id="profile_video" src="" frameborder="0"></iframe>
+                <!--<video controls="controls" class="video-stream" x-webkit-airplay="allow" data-youtube-id="hXfigUyeHaY" src="{{userData.profile_video}}"></video>-->
+                <!--<video controls="controls" class="video-stream" x-webkit-airplay="allow" data-youtube-id="hXfigUyeHaY" src="{{userData.profile_video}}"></video>-->
+                <!--<video controls="controls" class="video-stream" x-webkit-airplay="allow" data-youtube-id="N9oxmRT2YWw" src=""></video>-->
+            </div>
+        </ion-card-content>
+
+        <ion-card-content *ngIf="userData.profile_video==undefined && userData.profile_video==''">
+            <ion-list class="contactInfo">
+                <ion-item *ngIf="!is_employee">
+                    <ion-icon name="md-person" item-left></ion-icon>
+                    YouTube URL
+                    <p *ngIf="userData.profile_video!=undefined && userData.profile_video!=''">{{userData.profile_video}}</p>
+                    <p *ngIf="(userData.profile_video==undfined || userData.profile_video=='')" (click)="openVideoEdit()">Add Video</p>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <!-- Video Infomation -->
+
+    <!-- Photo Infomation -->
+    <ion-card class="contact">
+        <ion-card-header class="bb">Photo
+            <button *ngIf="!is_employee" class="pull-right bediticon" (click)="openPhotoEdit()"><ion-icon name="md-create"></ion-icon></button>
+        </ion-card-header>
+        <ion-card-content *ngIf="gallary_images.length > 0 ">
+            <ion-list class="contactInfo">
+                <ion-item>
+                    <ion-slides>
+                        <ion-slide *ngFor="let g_image of gallary_images">
+                            <img src="{{g_image}}" />
+                        </ion-slide>
+                    </ion-slides>
+                </ion-item>
+                <ion-item *ngIf="gallary_images.length <=0 && !is_employee">
+                    <p (click)="openPhotoEdit()">Add Photo</p>
+                </ion-item>
+
+            </ion-list>
+
+        </ion-card-content>
+    </ion-card>
+</ion-content>

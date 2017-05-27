@@ -1,0 +1,132 @@
+<ion-menu [content]="mycontent" class="menu-screen">
+    <ion-toolbar class="toplogo-part">
+      <p class="text-center"><img src="img/e2r_LogoMain.png" class="e2r-logo" alt="logo"/></p> 
+    </ion-toolbar>
+    
+    
+    
+    
+    <ion-content *ngIf="!isEmployer()">
+        <!--<div class="menu-profile">
+            <div class="avatar">
+                <img alt="Default" class="box-avatar" id="profilePic" src="img/user.jpg">
+            </div>
+            <h4>KL Software Technologies</h4>
+        </div>-->
+         <ion-list no-lines>
+             <button ion-item menuClose (click)="onMenuClick('employee_dashboard')">
+                <ion-icon item-left name="md-home" style="color:#373a44"></ion-icon>
+                Dashboard
+            </button>
+            <button ion-item menuClose (click)="onMenuClick('employee_profile')">
+                <ion-icon item-left name="md-contact" style="color:#e2541f"></ion-icon>
+                View Profile
+            </button>
+            <button ion-item menuClose (click)="onMenuClick('employment_offers')">
+                <ion-icon item-left name="md-star" style="color:#f0ad4e"></ion-icon>
+                Employment Offers
+            </button>
+        </ion-list>
+        
+        <ion-list no-lines>
+            <ion-list-header class='general'>
+                General
+            </ion-list-header>
+
+            <button ion-item menuClose disabled>
+                <ion-icon item-left name="md-settings"></ion-icon>
+                Settings
+            </button>
+            
+            <button ion-item menuClose disabled>
+                <ion-icon item-left name="md-mail"></ion-icon>
+                Contact us
+            </button>
+            
+            <button ion-item menuClose disabled>
+                <ion-icon item-left name="md-help-circle"></ion-icon>
+                Help &amp; feedback
+            </button>
+            
+            <button ion-item menuClose disabled>
+                <ion-icon item-left name="ios-share"></ion-icon>
+                Promote this App
+            </button> 
+            <button ion-item menuClose (click)="signOut()">
+                <ion-icon item-left name="ios-log-out"></ion-icon>
+                Sign Out
+            </button>                       
+        </ion-list>
+        
+    
+        
+        
+        
+    </ion-content>
+    
+    
+    <ion-content *ngIf="isEmployer()">
+        <ion-list no-lines>
+             <button ion-item menuClose (click)="onMenuClick('employer_dashboard')">
+                <ion-icon item-left name="md-home" style="color:#373a44"></ion-icon>
+                Dashboard
+            </button>
+            <button ion-item menuClose (click)="onMenuClick('employer_profile')">
+                <ion-icon item-left name="md-contact" style="color:#e2541f"></ion-icon>
+                View Profile
+            </button>
+            <button ion-item menuClose (click)="onMenuClick('employer_jobs')">
+                <ion-icon item-left name="md-briefcase" style="color:#f0ad4e"></ion-icon>
+                Jobs
+            </button>            
+            <button ion-item menuClose (click)="onMenuClick('employer_short_listed')">
+                <ion-icon item-left name="md-star" style="color:#f0ad4e"></ion-icon>
+                Shortlisted
+            </button>
+            <button ion-item menuClose (click)="onMenuClick('offers_sent')">
+                <ion-icon item-left name="ios-send" style="color:#1a85bc"></ion-icon>
+                Offers Sent
+            </button>
+            <button ion-item menuClose (click)="onMenuClick('employer_search')">
+                <ion-icon item-left name="md-search"></ion-icon>
+                Search
+            </button>
+           
+        </ion-list>
+        
+        <ion-list no-lines>
+            <ion-list-header class='general'>
+                General
+            </ion-list-header>
+
+            <button ion-item menuClose (click)="onMenuClick('settings')" disabled>
+                <ion-icon item-left name="md-settings"></ion-icon>
+                Settings
+            </button>
+            
+            <button ion-item menuClose (click)="onMenuClick('contact_us')" disabled>
+                <ion-icon item-left name="md-mail"></ion-icon>
+                Contact us
+            </button>
+            
+            <button ion-item menuClose (click)="onMenuClick('help')" disabled>
+                <ion-icon item-left name="md-help-circle"></ion-icon>
+                Help &amp; feedback
+            </button>
+            
+            <button ion-item menuClose (click)="onMenuClick('promote')" disabled>
+                <ion-icon item-left name="ios-share"></ion-icon>
+                Promote this App
+            </button> 
+            <button ion-item menuClose (click)="signOut()">
+                <ion-icon item-left name="ios-log-out"></ion-icon>
+                Sign Out
+            </button> 
+            <div showWhen="ios" class='empty_menu'></div>
+                                  
+        </ion-list>
+        
+    </ion-content>
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage" swipe-back-enabled="false"></ion-nav>

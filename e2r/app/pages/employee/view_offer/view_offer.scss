@@ -1,0 +1,73 @@
+.offerInfo {
+	background-color: #f5f5f5;
+}
+.offerPageMain {
+	background-image: url("../../img/bg4.jpg");
+    background-size: cover;
+    padding-top: 5%;
+    overflow: hidden;
+    clear: both;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+
+    p {
+    	line-height: 24px;
+    	margin-bottom: 0;
+    	margin-top: 0;
+    }
+}
+/* method 1*/
+.companyBasicInformation, .offerDescription {
+	background-color: $white;
+	.item {
+		background-color: $white;
+		h2, p {
+			white-space:normal;
+		}
+	}
+}
+/* method 2 */
+/*.companyBasicInformation, .offerDescription{
+	background-color: $white;
+	margin: 16px;
+	box-shadow: none;
+	.item {
+		background-color: $white;
+		h2, p {
+			white-space:normal;
+		}
+	}
+	ion-card-content {
+		padding: 0;
+	}
+}*/
+
+.offerMain {
+	padding: 12px 12px 12px 12px;
+
+	.offerAlert{
+		background-color: #dff0d8;
+		border:1px solid #d6e9c6; 
+		color: #3c763d;
+		padding: 16px 16px 10px 16px;
+		@include border-radius(4px);
+		h4{
+			font-weight: normal;
+    		font-size: 18px;
+    		margin-bottom: 0px;
+		}
+		h3{
+			margin-top: 0;
+    		margin-bottom: 0;
+		}
+	}
+}
+
+.btn-view-profile{
+	color: #ffffff;
+	padding: 10px;
+	button {
+		background-color: rgba(255,255,255,0.3);
+	}
+}

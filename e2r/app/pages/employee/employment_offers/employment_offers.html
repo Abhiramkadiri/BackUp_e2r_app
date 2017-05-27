@@ -1,0 +1,97 @@
+<ion-header>
+    <ion-navbar navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            Employment Offers
+        </ion-title>
+    </ion-navbar>
+    <ion-toolbar no-border-top>
+        <div class='tabslist' id='Slider1'>
+            <div class='tabsTitle' *ngFor='let tab of tabs; let i=index;' id='tab_{{i}}' (click)='onTabClick(i)'>{{tab.title}}</div>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="jobOffers offersentinformation">
+    <ion-slides #mySlider class='tabContent' (ionDidChange)="onSlideChanged()" [hidden]='isLoading'>
+        <ion-slide class='contentHolder' id='Slide_0'>
+            <ion-list class="mb0" *ngIf="offers_list.Offered.length!=0">
+                <ion-item *ngFor="let list_item of offers_list.Offered; let list_index=index">
+                    <ion-avatar item-left>
+                        <img src="{{getEmployerProfilePicture(list_item.employer.profile_pictureUrl)}}">
+                    </ion-avatar>
+                    <h2>{{list_item.employer.name}}</h2>
+                    <p>{{list_item.job.position}}</p>
+                    <button clear (click)='onViewOffer(list_item)' item-right>View Offer</button>
+                </ion-item>
+                <!--<ion-item *ngIf="offers_list.Offered.length==0">
+                    <p>Currently no "Offered" offers.</p>
+                </ion-item>-->
+            </ion-list>
+            <div class="nodatafound"  *ngIf="offers_list.Offered.length==0">
+                <ion-icon name="ios-information-circle-outline"></ion-icon>
+                You have not recived any offers.
+            </div>
+        </ion-slide>
+
+        <ion-slide class='contentHolder' id='Slide_1'>
+            <ion-list class="mb0" *ngIf="offers_list.Accepted.length!=0">
+                <ion-item *ngFor="let list_item of offers_list.Accepted; let list_index=index">
+                    <ion-avatar item-left>
+                        <img src="{{getEmployerProfilePicture(list_item.employer.profile_pictureUrl)}}">
+                    </ion-avatar>
+                    <h2>{{list_item.employer.name}}</h2>
+                    <p>{{list_item.job.position}}</p>
+                    <button clear (click)='onViewOffer(list_item)' item-right>View Offer</button>
+                </ion-item>
+                <!--<ion-item *ngIf="offers_list.Accepted.length==0">
+                    <p>You have not accepted any offers.</p>
+                </ion-item>-->
+            </ion-list>
+            <div class="nodatafound" *ngIf="offers_list.Accepted.length==0">
+                <ion-icon name="ios-information-circle-outline"></ion-icon>
+                You have not accepted any offers.
+            </div>
+        </ion-slide>
+        <ion-slide class='contentHolder' id='Slide_2'>
+            <ion-list class="mb0" *ngIf="offers_list.Interested.length!=0">
+                <ion-item *ngFor="let list_item of offers_list.Interested; let list_index=index">
+                    <ion-avatar item-left>
+                        <img src="{{getEmployerProfilePicture(list_item.employer.profile_pictureUrl)}}">
+                    </ion-avatar>
+                    <h2>{{list_item.employer.name}}</h2>
+                    <p>{{list_item.job.position}}</p>
+                    <button clear (click)='onViewOffer(list_item)' item-right>View Offer</button>
+                </ion-item>
+                <!--<ion-item *ngIf="offers_list.Interested.length==0">
+                    <p>You have not shown Interested on any offers.</p>
+                </ion-item>-->
+            </ion-list>
+             <div class="nodatafound" *ngIf="offers_list.Interested.length==0">
+                <ion-icon name="ios-information-circle-outline"></ion-icon>
+               You have not shown Interest on any offers.
+            </div>
+        </ion-slide>
+        <ion-slide class='contentHolder' id='Slide_3'>
+            <ion-list class="mb0" *ngIf="offers_list.Rejected.length!=0">
+                <ion-item *ngFor="let list_item of offers_list.Rejected; let list_index=index">
+                    <ion-avatar item-left>
+                        <img src="{{getEmployerProfilePicture(list_item.employer.profile_pictureUrl)}}">
+                    </ion-avatar>
+                    <h2>{{list_item.employer.name}}</h2>
+                    <p>{{list_item.job.position}}</p>
+                    <button clear (click)='onViewOffer(list_item)' item-right>View Offer</button>
+                </ion-item>
+                <!--<ion-item *ngIf="offers_list.Rejected.length==0">
+                    <p>No rejected offers.</p>
+                </ion-item>-->
+            </ion-list>
+                <div class="nodatafound" *ngIf="offers_list.Rejected.length==0">
+                    <ion-icon name="ios-information-circle-outline"></ion-icon>
+                    No rejected offers.
+                </div>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

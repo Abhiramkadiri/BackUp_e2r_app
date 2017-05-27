@@ -1,0 +1,86 @@
+<!--<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Summary
+    </ion-title>
+    <ion-buttons start>
+      <button (click)="dismiss()">
+        <span showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding class="has-header">
+  <button light class="pull-right bediticon" (click) = "enable()" *ngIf="summaryInput.text"><ion-icon name="md-create"></ion-icon></button><br />
+	<ion-list class="editForms">
+
+	  <ion-item>
+	    <ion-label stacked>Details description</ion-label>
+	    <ion-textarea [(ngModel)] = "summaryInput.text"></ion-textarea>
+	  </ion-item>
+
+	</ion-list>
+  <button type="button" block class="btn btn-default" (click)="saveSummaryEdit(summaryInput)">Save</button>
+</ion-content>-->
+
+<ion-header>
+
+    <ion-toolbar>
+        <ion-title>
+            Summary
+        </ion-title>
+        <ion-buttons start class="close-left">
+            <button (click)="dismiss($event)">
+                <span showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="lightdarkbg iputfocusandroid">
+
+    <div class="company-basic-edit" *ngIf="edit">
+        <ion-list class="editForms mb0">
+            <ion-item>
+                <ion-label stacked>Summary</ion-label>
+                <ion-textarea [(ngModel)]="summaryInput.text"></ion-textarea>
+            </ion-item>
+        </ion-list>
+    </div>
+
+    <div *ngIf="show">
+        <ion-card *ngIf="summaryInput.text">
+            <ion-card-content >
+                {{summaryInput.text}}
+            </ion-card-content>
+            <!--<ion-card-content *ngIf="!summaryInput.text" (click)="addField()">
+                <button full class="btnsave">
+                [+] Add Summary
+              </button>
+            </ion-card-content>-->
+        </ion-card>
+        <div class="nodatafound" *ngIf="!summaryInput.text">
+            <ion-icon name="ios-information-circle-outline"></ion-icon>
+            No Data Found...
+        </div>
+        <!--<p *ngIf="benefitsInputs.benefits">{{benefitsInputs.benefits}}</p>
+        <p *ngIf="!benefitsInputs.benefits" (click)="addField()">Add Benefits</p>-->
+    </div>
+</ion-content>
+
+<ion-footer *ngIf="is_owner" class="footerbtn common-edit">
+  <button fab fab-right fab-bottom class="fixedBottom" (click)="enable()" *ngIf="!edit">
+    <ion-icon  *ngIf="summaryInput.text" name="md-create"></ion-icon>
+    <ion-icon  *ngIf="!summaryInput.text" name="md-add"></ion-icon>
+  </button>
+  <button type="button" full class="btn btn-default btnsave" (click)="saveSummaryEdit(summaryInput)"  *ngIf="edit"><ion-icon name="md-checkmark"></ion-icon> Save</button>
+</ion-footer>
+
+<!--<ion-toolbar *ngIf="is_owner" position="bottom" class="common-edit">
+    <button fab fab-right fab-bottom class="fixedBottom" (click)="enable()" *ngIf="!edit">
+    <ion-icon name="md-create"></ion-icon>
+  </button>
+</ion-toolbar>-->

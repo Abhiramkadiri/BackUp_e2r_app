@@ -1,0 +1,98 @@
+<ion-header>
+    <ion-navbar navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            Offers Sent
+        </ion-title>
+    </ion-navbar>
+    <ion-toolbar no-border-top>
+        <div class='tabslist' id='Slider1'>
+            <div class='tabsTitle' *ngFor='let tab of tabs; let i=index;' id='tab_{{i}}' (click)='onTabClick(i)'>{{tab.title}}</div>
+        </div>
+    </ion-toolbar>        
+</ion-header>
+
+<ion-content class="offers_sent offersentinformation">
+    <ion-slides #mySlider class='tabContent' (ionDidChange)="onSlideChanged()" [hidden]='isLoading'>
+        <ion-slide class='contentHolder' id='Slide_0'>
+            <ion-list class="mb0" *ngIf="offers_list.Offered.length!=0">
+                    <ion-item *ngFor="let list_item of offers_list.Offered; let list_index=index">
+                        <ion-avatar item-left>
+                            <img *ngIf="list_item.employee.profile_pictureUrl!=undefined && list_item.employee.profile_pictureUrl!='' " src="{{list_item.employee.profile_pictureUrl}}">
+                        <img *ngIf="list_item.employee.profile_pictureUrl==undefined || list_item.employee.profile_pictureUrl=='' " src="img/user.jpg">
+                            <!--<img *ngIf="list_item.employee.profile_pictureUrl==undefined || list_item.employee.profile_pictureUrl=='' " src="img/user.jpg">-->
+                        </ion-avatar>
+                        <h2>{{list_item.employee.firstname}} {{list_item.employee.lastname}}</h2>
+                        <p><span>Years of Experience : </span>{{list_item.employee.total_experience}}</p>
+                        <p><span>Desired Job : </span>{{list_item.employee.desired_job_type}}</p>
+                        <p><span>Offer Amount : </span>{{list_item.offer_amount}}</p>
+                        <button clear secondary (click)='onViewMore(list_item)'>View more</button>
+                        <button clear (click)='onShowEmployeeProfile(list_item.employee)'>Review Profile</button>
+                    </ion-item>
+            </ion-list>
+            <div class="nodatafound"  *ngIf="offers_list.Offered.length==0">
+                <ion-icon name="ios-information-circle-outline"></ion-icon>
+                Currently no offers sent.
+            </div>
+        </ion-slide>
+        <ion-slide class='contentHolder' id='Slide_1' >
+            <ion-list class="mb0" *ngIf="offers_list.Accepted.length!=0">
+                    <ion-item *ngFor="let list_item of offers_list.Accepted; let list_index=index">
+                        <ion-avatar item-left>
+                            <img *ngIf="list_item.employee.profile_pictureUrl==undefined || list_item.employee.profile_pictureUrl=='' " src="img/user.jpg">
+                        </ion-avatar>
+                        <h2>{{list_item.employee.firstname}} {{list_item.employee.lastname}}</h2>
+                        <p><span>Years of Experience : </span>{{list_item.employee.total_experience}}</p>
+                        <p><span>Desired Job : </span>{{list_item.employee.desired_job_type}}</p>
+                        <p><span>Offer Amount :  </span>{{list_item.offer_amount}}</p>
+                        <button clear secondary (click)='onViewMore(list_item)'>View more</button>
+                        <button clear (click)='onShowEmployeeProfile(list_item.employee)'>Review Profile</button>
+                    </ion-item>
+            </ion-list>
+            <div class="nodatafound" *ngIf="offers_list.Accepted.length==0">
+                <ion-icon name="ios-information-circle-outline"></ion-icon>
+                Currently no "Accepted" offers.
+            </div>
+        </ion-slide>
+        <ion-slide class='contentHolder' id='Slide_2' >
+            <ion-list class="mb0" *ngIf="offers_list.Interested.length!=0">
+                    <ion-item *ngFor="let list_item of offers_list.Interested; let list_index=index">
+                        <ion-avatar item-left>
+                            <img *ngIf="list_item.employee.profile_pictureUrl==undefined || list_item.employee.profile_pictureUrl=='' " src="img/user.jpg">
+                        </ion-avatar>
+                        <h2>{{list_item.employee.firstname}} {{list_item.employee.lastname}}</h2>
+                        <p><span>Years of Experience : </span>{{list_item.employee.total_experience}}</p>
+                        <p><span>Desired Job : </span>{{list_item.employee.desired_job_type}}</p>
+                        <p><span>Offer Amount : </span>{{list_item.offer_amount}}</p>
+                        <button clear (click)='onViewMore(list_item)'>View more</button>
+                        <button clear (click)='onShowEmployeeProfile(list_item.employee)'>Review Profile</button>
+                    </ion-item>
+            </ion-list>
+             <div class="nodatafound" *ngIf="offers_list.Interested.length==0">
+                <ion-icon name="ios-information-circle-outline"></ion-icon>
+                Currently no "Interested" offers.
+            </div>
+        </ion-slide>
+        <ion-slide class='contentHolder' id='Slide_3' >
+            <ion-list class="mb0" *ngIf="offers_list.Rejected.length!=0">
+                    <ion-item *ngFor="let list_item of offers_list.Rejected; let list_index=index">
+                        <ion-avatar item-left>
+                            <img *ngIf="list_item.employee.profile_pictureUrl==undefined || list_item.employee.profile_pictureUrl=='' " src="img/user.jpg">
+                        </ion-avatar>
+                        <h2>{{list_item.employee.firstname}} {{list_item.employee.lastname}}</h2>
+                        <p><span>Years of Experience : </span>{{list_item.employee.total_experience}}</p>
+                        <p><span>Desired Job : </span>{{list_item.employee.desired_job_type}}</p>
+                        <p><span>Offer Amount : </span>{{list_item.offer_amount}}</p>
+                        <button clear (click)='onViewMore(list_item)'>View more</button>
+                        <button clear (click)='onShowEmployeeProfile(list_item.employee)'>Review Profile</button>
+                    </ion-item>
+            </ion-list>
+            <div class="nodatafound" *ngIf="offers_list.Rejected.length==0">
+                <ion-icon name="ios-information-circle-outline"></ion-icon>
+                Currently no "Rejected" offers.
+            </div>
+        </ion-slide>                        
+    </ion-slides>
+</ion-content>

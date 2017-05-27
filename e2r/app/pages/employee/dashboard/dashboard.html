@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-navbar navbar>
+      <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button> 
+    <ion-title>
+      Employee
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="dashboard"> 
+<div class="profile" (click) = "profilePage();">
+	 <div class="profilefocus text-center">
+        <div class="avatar" light>
+          <img src="{{profilePicture}}" alt="Default" id="profilePic"/>
+          <!--<img *ngIf="userData.profile_pictureUrl==undefined || userData.profile_pictureUrl==''" src="img/user.jpg" alt="Default" id="profilePic"/>-->
+        </div>
+        <h4 light>{{userData.firstname}} {{userData.lastname}}</h4>
+        <p light>{{userData.desired_job_type}}</p>
+    </div>
+</div>
+
+<!-- // e2r Rating screen -->
+<ion-card>
+    <ion-card-header class="cardHead ratingheading">
+      <span>Rating</span> 
+      <span class="pull-right orangecolor" *ngIf='userData.rating!=undefined'>{{userData.rating}}/100</span>
+      <span class="pull-right orangecolor" *ngIf='userData.rating==undefined'>Not yet rated.</span>
+    <!-- Progressbar -->
+      <div class="cssProgress" *ngIf='userData.rating!=undefined'>
+          <div class="progress1">
+            <div class="cssProgress-bar cssProgress-info cssProgress-stripes" data-percent="75" [ngStyle]="{'width':userData.rating+'%'}">
+              <!--<span class="cssProgress-label">75%</span>-->
+            </div>
+          </div>
+        </div>
+    </ion-card-header>
+    <ion-card-content>
+    <p class="ashcolor" *ngIf="ProfileStrength!='Bad'">
+      Profile Strength: <strong>{{ProfileStrength}}</strong>
+      <!--<span class="pull-right moreInfo"><ion-icon name="ios-arrow-down"></ion-icon></span>-->
+    </p>
+    <button *ngIf="ProfileStrength=='Bad'" full (click)='profilePage()'>Start by editing your Profile</button>
+    </ion-card-content>
+</ion-card>	
+<!-- // e2r Rating screen -->
+
+<ion-card class="offersToReview">
+  <ion-card-header>
+     <img src="img/review.png"/> <h2>Offers to review</h2>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list  *ngIf='offers_list.length!=0'>
+      <ion-item *ngFor="let offer of offers_list" (click) = "onViewOffer(offer)">
+          <ion-avatar item-left>
+            <img src="{{getEmployerProfilePicture(offer.employer.profile_pictureUrl)}}">
+          </ion-avatar>
+          <h2>{{offer.employer.name}}</h2>
+          <p>{{offer.job.position}}</p>
+          <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
+      </ion-item>
+    </ion-list>
+    <div class="nodatafound notfoundinfo" *ngIf='offers_list.length==0'>
+      <img src="img/nodatafound.png"/>
+        <p>No offers received.</p>
+    </div>
+  </ion-card-content>
+</ion-card>
+
+<!--<p padding class="notification">Offers to review</p>
+
+<ion-card class="offersToReview" *ngFor="let offer of offers_list" (click) = "onViewOffer(offer)">
+  <ion-item>
+    <ion-avatar item-left>
+      <img src="{{getEmployerProfilePicture(offer.employer.profile_pictureUrl)}}">
+    </ion-avatar>
+    <h2>{{offer.employer.name}}</h2>
+    <p>{{offer.job.position}}</p>
+  </ion-item>
+</ion-card>
+<ion-card *ngIf='offers_list.length==0'>
+  <ion-list >
+    <ion-item>
+      Offers yet to be received.
+    </ion-item>
+  </ion-list>
+</ion-card>-->
+
+<!--<ion-card  (click) = "viewofferPage()">
+  <ion-item>
+    <ion-avatar item-left>
+      <img src="img/user.jpg">
+    </ion-avatar>
+    <h2>Techware Solutions</h2>
+    <p>Review Employement Offers</p>
+  </ion-item>
+</ion-card>
+
+<hr/>
+
+<ion-card class="offersToReview"  (click) = "searchPage()">
+  <ion-item>
+    <ion-avatar item-left>
+      <img src="img/user.jpg">
+    </ion-avatar>
+    <ion-icon class="greencolor" name="checkmark-circle" item-right></ion-icon>
+    <h2>KL Software Technologies</h2>
+    <p>Review Employement Offers</p>
+  </ion-item>
+</ion-card>
+
+<ion-card class="offersToReview"  (click) = "companyProfilePage()">
+  <ion-item>
+    <ion-avatar item-left>
+      <img src="img/user.jpg">
+    </ion-avatar>
+    <ion-icon class="orangecolor" name="md-information-circle" item-right></ion-icon>
+    <h2>KL Software Technologies</h2>
+    <p>Review Employement Offers</p>
+  </ion-item>
+</ion-card>
+
+<ion-card class="offersToReview" (click) = "shortlistCandidatePage()">
+  <ion-item>
+    <ion-avatar item-left>
+      <img src="img/user.jpg">
+    </ion-avatar>
+    <ion-icon class="redcolor" name="close-circle" item-right></ion-icon>
+    <h2>KL Software Technologies</h2>
+    <p>Review Employement Offers</p>
+  </ion-item>
+</ion-card>-->
+</ion-content>

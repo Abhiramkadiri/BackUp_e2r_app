@@ -1,0 +1,72 @@
+//filter icon
+.search-page {
+ .fixedBottom {
+        position: fixed;
+        background: #446fa8;
+    } 
+  ion-toolbar[position=bottom] {
+        overflow: initial;
+        background: transparent;
+        min-height: inherit;
+        padding: 0px; 
+    } 
+}
+ion-searchbar.search-result {
+    .searchbar-ios-cancel {
+        color: $white;
+        opacity: 0.9;
+    }
+    .searchbar-input {
+        background: $white;
+    }
+} 
+
+.filter {
+    .filterHead {
+        margin-bottom: 0px;
+        margin-top: 0px;
+        .itemlist {
+            background: #f5f5f5;
+            padding-right: 16px;
+            
+        }
+        .red {
+            color: #f00;
+        }
+    }
+    ion-list-header {
+        padding-top: 16px;
+        padding-bottom: 16px;
+        background: #fff;
+        ion-icon {
+            margin-top: inherit;
+            margin-bottom: inherit;
+        }
+    }
+    ion-list + ion-list {
+        margin-top: inherit;
+    }
+    ion-list + ion-list ion-list-header {
+        margin-top: inherit;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+    .ion-ios-arrow-forward {
+        float: right;
+    }
+
+}
+.starcolor {
+    color: #f0ad4e;
+}
+.range_left{
+    float:left;
+}
+.range_right{
+    float:right;
+}
+
+isApplied{
+    background-color: green;
+}
+

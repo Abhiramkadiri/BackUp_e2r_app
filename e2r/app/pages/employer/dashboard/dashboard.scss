@@ -1,0 +1,276 @@
+.dashboard-page {
+    .toolbar-background {
+        background-color: #373a44;
+    }
+    .bar-button-default,
+    .toolbar-title {
+        color: $white;
+    }
+}
+.dashboard-employer-page {
+    .notfoundinfo {
+      height: 150px;
+      img {
+        width: 40px;
+      }
+      p {
+        font-size: 14px;
+        color: #666;
+      }
+    }
+}
+
+.dashboard {
+    background-color: #f5f5f5;
+}
+
+.profile {
+    /*padding-top: 5%;*/
+    overflow: hidden;
+    clear: both;
+    .profilefocus {
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        padding-top: 5%;
+    }
+}
+.employer-dashboards {
+    /*padding: 0;*/
+    text-align: center;
+    ion-col {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: #fff;
+    }
+    .offered {
+        background:#1a85bc;
+    }
+    .shortlisted {
+        background:  #f0ad4e;
+    }
+    h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+}
+.shortlisted-list, .offered-list {
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    p.seemore {
+        background: #fff;
+        padding: 15px;
+        margin: 0;
+        /* margin-bottom: 10px; */
+        font-weight: 600;
+        color: #1a85bc;
+    }
+}
+.offered-list {
+    margin-bottom: 0;
+}
+ 
+.shortlisted-list h3, .offered-list h3 {
+    padding-left: 15px;
+    background: #fff;
+    margin-top: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 15px;
+    border-bottom: 1px solid #ddd;
+    border-top: none;
+    color: #373a44;
+    margin-bottom: 0;
+    
+}
+.shortlisted-list ion-card, .offered-list ion-card {
+    margin: 0;
+    width: 100%;
+    border-bottom: 1px solid #ebecef;
+    h2 {
+        font-weight: 500;
+    }
+}
+.shortlisted-list h3 ion-icon {
+    color: #f0ad4e;
+}
+.offered-list h3 ion-icon {
+    color: #1a85bc;
+}
+.offered-list h3 .info-part, .shortlisted-list h3 .info-part {
+    float: right;
+    color: #BDBDBD;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 50%;
+    position: relative;
+}
+.avatar img {
+    border-radius: 50%;
+}
+.cardHead {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+.notification {
+    padding-bottom: 0px;
+}
+.moreInfo {
+    font-size: 20px;
+    vertical-align: top;
+    line-height: inherit;
+}
+
+/* Information bar */
+.shortlisted-profile {
+    .basic {
+        width: 100%;
+        margin: 0;
+        z-index: 9999;
+        position: relative;
+        border-top: 5px solid #ddd;
+        ion-label {
+            white-space: normal;
+            font-weight: 500;
+            line-height: 24px;
+        }
+        ion-list > .item:first-child {
+            border-top: none;
+        }
+        ion-list > .item:last-child {
+            border-bottom: none;
+        }
+        p {
+            font-size: 14px;
+            line-height: 24px;
+            }
+        .experience-info {
+            p {
+                color: #ff4601;
+            }
+            p.time-peroid {
+                color: #666;
+                font-size: 1.4rem;
+            }
+            
+        } 
+    }
+    .information {
+        background: #e9eff3;
+        color: #333;
+        margin-bottom: 5px;
+        
+    }
+    
+} 
+
+/* ------------------------------
+   progress bar
+   ------------------------------*/
+
+.cssProgress {
+    width: 100%;
+    margin-top: 10px;
+    .progress1,
+    .progress2,
+    .progress3 {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+    }
+    .cssProgress-bar {
+        display: block;
+        float: left;
+        width: 0%;
+        height: 100%;
+        background: $orange;
+        box-shadow: inset 0px -1px 2px rgba(0, 0, 0, 0.1);
+        transition: width 0.8s ease-in-out;
+    }
+    .cssProgress-label {
+        position: absolute;
+        overflow: hidden;
+        left: 0px;
+        right: 0px;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 0.7em;
+        text-align: center;
+        text-shadow: 0px 1px rgba(0, 0, 0, 0.3);
+    }
+    .cssProgress-right {
+        float: right !important;
+    }
+    .cssProgress-label-left {
+        margin-left: 10px;
+        text-align: left !important;
+    }
+    .cssProgress-label-right {
+        margin-right: 10px;
+        text-align: right !important;
+    }
+    .cssProgress-label2 {
+        display: block;
+        margin: 2px 0;
+        padding: 0 8px;
+        font-size: 0.8em;
+        &.cssProgress-label2-right {
+            text-align: right;
+        }
+        &.cssProgress-label2-center {
+            text-align: center;
+        }
+    }
+    .cssProgress-stripes,
+    .cssProgress-active,
+    .cssProgress-active-right {
+        background-image: linear-gradient( -45deg, rgba(255, 255, 255, .125) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .125) 50%, rgba(255, 255, 255, .125) 75%, transparent 75%, transparent) !important;
+        background-size: 35px 35px !important;
+    }
+}
+
+/* -----------------------------------------------------
+	Progress Bar 1
+-------------------------------------------------------- */
+
+.progress1 {
+    background-color: $pg-default-bg;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.2);
+    .cssProgress-bar {
+        height: 22px;
+    }
+    .cssProgress-label {
+        line-height: 22px;
+        font-size: $font-size16;
+    }
+}
+
+/* -----------------------------------------------------
+	Progress Bar 3
+-------------------------------------------------------- */
+
+.progress3 {
+    width: auto !important;
+    padding: 4px;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    .cssProgress-bar {
+        height: 16px;
+        border-radius: 3px;
+    }
+    .cssProgress-label {
+        line-height: 16px;
+    }
+}
+
+.gallery_image{
+    float:left;
+    margin: 1%;
+    width:48%;
+    border:2px solid #666;
+}

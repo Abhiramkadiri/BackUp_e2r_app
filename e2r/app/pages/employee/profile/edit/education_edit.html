@@ -1,0 +1,56 @@
+<!-- Toolbar End Design -->
+<ion-header>
+  <ion-navbar>    
+        <ion-title>
+            Education
+        </ion-title>
+        <!--<ion-buttons start class="close-left">
+            <button (click)="dismiss()">
+        <span showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+        </ion-buttons>-->
+        <!--<ion-buttons end *ngIf="is_owner">
+      <button (click)="onOpenEducation('create')">
+        <span>Add</span>
+      </button>
+    </ion-buttons>-->
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="lightdarkbg educations">
+    <ion-card class="profile-editpart" *ngFor="let educationitem of userData.education; let i=index">
+        <ion-card-content  *ngIf="educationitem !=''">
+            <div class="text-right rightedit" *ngIf="is_owner">
+                <button danger clear (click)="onRemoveEducation(i)"> 
+                    <ion-icon name="md-trash" ></ion-icon>
+                </button>
+                <button secondary clear (click)="onOpenEducation('edit',i)">
+                    <ion-icon name="md-create" ></ion-icon>
+                </button>
+            </div>
+            <div class="conleft">
+                <!--<div item-right *ngIf="is_owner">
+                    <ion-icon name="md-create" (click)="onOpenEducation('edit',i)"></ion-icon>
+                    <ion-icon name="trash" (click)="onRemoveEducation(i)"></ion-icon>
+                </div>-->
+                <h2><strong>{{educationitem.school}}</strong></h2>
+                <p>{{educationitem.degree}}</p>
+                <p>{{educationitem.field}}</p>
+                <p>{{educationitem.from_year}} – {{educationitem.to_year}}</p>
+            </div>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+
+<ion-footer *ngIf="is_owner" class="footerbtn common-edit">
+    <button fab fab-right fab-bottom class="fixedBottom" (click)="onOpenEducation('create')" *ngIf="!edit">
+    <ion-icon name="md-add"></ion-icon>
+  </button>
+</ion-footer>
+
+<!--<ion-toolbar *ngIf="is_owner" position="bottom" class="common-edit">
+  <button fab fab-right fab-bottom class="fixedBottom"  (click)="onOpenEducation('create')" *ngIf="!edit">
+    <ion-icon name="md-add"></ion-icon>
+  </button>
+</ion-toolbar>-->

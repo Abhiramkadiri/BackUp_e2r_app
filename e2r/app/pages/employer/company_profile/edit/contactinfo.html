@@ -1,0 +1,51 @@
+<ion-header>
+
+    <ion-toolbar>
+        <ion-title>
+            Contact Info
+        </ion-title>
+
+        <ion-buttons start>
+            <button (click)="dismiss($event)">
+        <span showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="companyProfile">
+    <ion-card class="header-edit">
+        <ion-card-content>
+            <form (ngSubmit)="saveContactEdit(contactsInputs)" #contacteditForm="ngForm">
+            <ion-list class="editForms">
+                <ion-item>
+                    <ion-icon name="ios-call" item-left></ion-icon>
+                    <ion-label stacked>Phone</ion-label>
+                    <ion-input type="number" [(ngModel)]="contactsInputs.phone"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="md-mail" item-left></ion-icon>
+                    <ion-label stacked>Email</ion-label>
+                    <ion-input type="email" [(ngModel)]="contactsInputs.email" disabled></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="logo-linkedin" item-left></ion-icon>
+                    <ion-label stacked>Linkedin</ion-label>
+                    <ion-input type="url" [(ngModel)]="contactsInputs.linkedin"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="md-globe" item-left></ion-icon>
+                    <ion-label stacked>Website</ion-label>
+                    <ion-input type="url" [(ngModel)]="contactsInputs.portal" placeholder="http://www.yourcompany.com"></ion-input>
+                </ion-item>
+            </ion-list>
+                <button type="submit" full class="btn btn-default  btnsave"><ion-icon name="md-checkmark"></ion-icon> Save</button>
+            </form>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+<!--<ion-footer class="footerbtn">
+  <button type="button" full class="btn btn-default  btnsave" (click)="saveContactEdit(contactsInputs)"><ion-icon name="md-checkmark"></ion-icon> Save</button>
+</ion-footer>-->

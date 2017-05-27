@@ -1,0 +1,50 @@
+<ion-navbar navbar>
+  <ion-title>
+    Login
+  </ion-title>
+</ion-navbar>
+
+
+
+<ion-content padding class="login"> 
+    <!--<p class="text-center"><img src="img/e2r_Logo.png" alt="logo"/></p>-->
+
+    <div padding class="loginSignupContainer">
+    <!--<p class="text-center"> Enter your username / password</p>-->
+    <p class="text-center"><img src="img/e2r_LogoMain.png" alt="logo"/></p>
+    <form  (ngSubmit)="onLogin()" #loginForm="ngForm">
+
+    <ion-list>
+
+      <ion-item class="bTopNone">
+        <ion-label floating>Username</ion-label>
+        <ion-input type="email" required
+          [(ngModel)]="loginInputs.userName"
+            ngControl="userName"  #userName="ngForm" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (blur)='onFieldValidate()'></ion-input>
+      </ion-item>
+
+      <!--<div class="invalid" [hidden]="userName.valid || userName.pristine || userName.pattern">
+            invalid email
+      </div>-->     
+      <div class="invalid" *ngIf='!username_field_validate' >Invalid email</div>
+
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" required
+          [(ngModel)]="loginInputs.password"
+            ngControl="Password"  #Password="ngForm" ></ion-input>
+      </ion-item>
+
+      <div class="invalid" [hidden]="Password.valid || Password.pristine">
+            Password is required
+      </div>
+
+    </ion-list>
+    <button type="submit" block class="btn btn-default" [disabled]="!loginForm.form.valid || disableLogin">LOGIN</button>
+      <p class="text-right" (click) = "forgotLogin()"> Forgot Login?</p>
+      <hr/>{{disableLogin}}
+      <p class="text-center" (click)="signupPage()">Don't have an account? <strong>Sign Up</strong></p>
+    </form>
+  </div>
+
+</ion-content>

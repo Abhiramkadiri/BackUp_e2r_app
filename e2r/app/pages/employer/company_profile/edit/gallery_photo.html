@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-title>
+      Gallery Photo
+    </ion-title>
+
+    <ion-buttons start>
+      <button (click)="dismiss($event)">
+        <span showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="companyProfile">
+
+  <ion-list class="editForms mb0">
+    <ion-item *ngIf="gallery_data.length >0">
+        <div class="gallery_image" *ngFor="let gal_img of gallery_data; let img_index=index">
+            <img src="{{gal_img}}">
+            <div (click)="onRemoveGalleryImage(gal_img,img_index)"><ion-icon name="ios-trash"></ion-icon> Remove</div>
+        </div>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer class="footerbtn">
+    <button type="button" full class="btn btn-default  btnsave" (click)="presentActionSheet()"><ion-icon name="md-checkmark"></ion-icon> Upload Images</button>
+</ion-footer>

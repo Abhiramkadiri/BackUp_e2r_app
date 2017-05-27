@@ -1,0 +1,89 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            {{educationTitle}}
+        </ion-title>
+        <ion-buttons start class="close-left">
+            <button (click)="dismiss()">
+        <span showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="lightdarkbg iputfocusandroid">
+ <ion-card>
+    <form (ngSubmit)="onSaveEducation()" #edueditForm="ngForm">
+    <ion-list class="editForms overflow">
+        <ion-item>
+            <ion-label stacked>Institution (Required)</ion-label>
+            <ion-input type="text" [(ngModel)]="education_data.school" required></ion-input>
+        </ion-item>
+        <div class="invalid" *ngIf="validate_field_empty.school">Enter Schoolname</div>
+        <ion-item>
+            <ion-label stacked>Degree</ion-label>
+            <ion-select [(ngModel)]="education_data.degree">
+                <ion-option *ngFor="let education of educations_list">{{education.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <div *ngIf="validate_field_empty.degree" class="invalid">Enter Degree</div>
+        <ion-item>
+            <ion-label stacked>Field of Study</ion-label>
+            <ion-input type="text" [(ngModel)]="education_data.field"></ion-input>
+        </ion-item>
+        <div class="invalid" *ngIf="validate_field_empty.field">Enter Field of Study</div>
+
+        <ion-item width-50 class="itemSpit pr10">
+            <ion-label stacked>From Month</ion-label>
+            <ion-select [(ngModel)]="education_data.from_month">
+                <ion-option *ngFor="let month of monthList">{{month}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item width-50 class="itemSpit pr10">
+            <ion-label stacked>From Year</ion-label>
+            <ion-select [(ngModel)]="education_data.from_year">
+                <ion-option *ngFor="let year of yearList; let i=index">{{year}}</ion-option>
+            </ion-select>
+        </ion-item>
+        
+        <div class="clearfix"></div>
+        <div class="width50">
+             <div class="invalid" *ngIf="validate_field_empty.from_month">Enter From Month</div>
+        </div>
+        <div class="width50">
+             <div class="invalid" *ngIf="validate_field_empty.from_year">Enter From Year</div>
+        </div>
+        <div class="clearfix"></div>
+        <!--<div class="invalid" *ngIf="validate_field_empty.from_month">Enter From Month</div>
+        <div class="invalid" *ngIf="validate_field_empty.from_year">Enter From Year</div>-->
+
+        <ion-item width-50 class="itemSpit pr10">
+            <ion-label stacked>To Month</ion-label>
+            <ion-select [(ngModel)]="education_data.to_month">
+                <ion-option *ngFor="let month of monthList">{{month}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item width-50 class="itemSpit pr10">
+            <ion-label stacked>To Year</ion-label>
+            <ion-select [(ngModel)]="education_data.to_year">
+                <ion-option *ngFor="let year of yearList; let i=index">{{year}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <div class="clearfix"></div>
+        <div class="width50">
+            <div class="invalid" *ngIf="validate_field_empty.to_month">Enter To Month</div>
+        </div>
+        <div class="width50">
+             <div class="invalid" *ngIf="validate_field_empty.to_year">Enter To Year</div>
+        </div>
+        <div class="clearfix"></div>
+        <!--<div class="invalid" *ngIf="validate_field_empty.to_month">Enter To Month</div>
+        <div class="invalid" *ngIf="validate_field_empty.to_year">Enter To Year</div>-->
+        <div class="invalid" *ngIf="validate_field_empty.invalied_date">Enter the valid education period</div>
+    </ion-list>
+
+
+    <button type="submit" block class="btn btn-default mt20" >{{button_text}}</button>
+    </form>
+    </ion-card>
+</ion-content>

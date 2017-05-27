@@ -1,0 +1,47 @@
+<ion-header>
+
+  <ion-navbar navbar>
+    <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>  
+
+    <ion-title>
+      Jobs 
+    </ion-title>
+  </ion-navbar>
+
+  <ion-toolbar>
+    <ion-searchbar class="search-result" [(ngModel)]="searchTerm" (ngModelChange)="onSearchJobs()"></ion-searchbar>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="jobs-page companyProfile">
+    <ion-list class="mb0" *ngIf="jobs_list.length!=0">
+        <ion-item *ngFor="let job of jobs_list; let job_index=index">
+            <ion-icon name="md-create" class="editjobs" (click)="onOpenJob('edit',job)" item-right></ion-icon>
+            <h2>{{job.position}}</h2>
+            <p><ion-icon name="ios-briefcase-outline"></ion-icon> {{job.job_type}}</p>
+            <p>
+              <span *ngIf='job.status=="Open"'><ion-icon  name="ios-folder-open-outline"></ion-icon> {{job.status}}</span>
+              <span *ngIf='job.status=="Closed"'><ion-icon  name="ios-folder-outline"></ion-icon> {{job.status}}</span>
+              <span *ngIf='job.status=="Hold"'><ion-icon  name="ios-information-circle-outline"></ion-icon> {{job.status}}</span>
+            </p>
+        </ion-item>
+    </ion-list>
+     <div class="nodatafound" *ngIf="jobs_list.length==0">
+          <img src="img/nodatafound.png"/>
+          <p>There is no jobs created yet.</p>
+      </div>
+</ion-content>
+
+<ion-footer>
+  <button fab fab-center fab-bottom class="fixedBottom" (click)="onOpenJob('new',null)">
+    <ion-icon name="md-add"></ion-icon>
+  </button>
+</ion-footer>
+<!-- <ion-toolbar position="bottom">
+  <button fab fab-center fab-bottom class="fixedBottom" (click)="onOpenJob('new',null)">
+    <ion-icon name="md-add"></ion-icon>
+  </button>
+</ion-toolbar>-->

@@ -1,0 +1,317 @@
+<ion-header>
+	<ion-navbar navbar>
+      <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button> 		
+		<ion-title>
+			Profile 
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content class="selectOption profileInformation">
+
+	<!-- // Profile information -->
+	<ion-card class="userProfile">
+		<button *ngIf="is_owner" class="pull-right bediticon" (click) = "openBasicEdit()"><ion-icon name="md-create"></ion-icon></button>
+		<div class="text-center">
+			<div class="avatar overflow">
+	            <img src="{{profilePicture}}" alt="Default" id="profilePic"/>
+	        </div>
+	        <div class="userBasicInfo">
+	        	<h2 *ngIf="userData.firstname">{{userData.firstname}} {{userData.lastname}}</h2>
+	        	<p *ngIf="userData.desired_job_type">{{userData.desired_job_type}}</p>
+	        	<p *ngIf="userData.email"><ion-icon name="mail"></ion-icon> {{userData.email}}</p>
+
+	        	<p *ngIf="userData.phone">
+							<ion-icon name="md-phone-portrait"></ion-icon>
+							<span *ngIf='userData.phone.mobile!=undefined'> (+91) {{userData.phone.mobile}}</span>
+							<span *ngIf='userData.phone.mobile==undefined && userData.phone.home!=undefined'> (+91) {{userData.phone.home}}</span>
+							<span *ngIf='userData.phone.mobile==undefined && userData.phone.home==undefined && userData.phone.work!=undefined'> (+91) {{userData.phone.work}}</span>
+						</p>
+	        	<!--<p><ion-icon name="chatbubbles"></ion-icon></p>-->
+						<p>
+							<button *ngIf='userData.messenger!=undeifned && userData.messenger.skype!=undefined && userData.messenger.skype!=""' (click)='onSkype(userData.messenger.skype)'>
+								 <ion-icon name="logo-skype"></ion-icon>
+							</button>
+							<button *ngIf='userData.facebook!=undefined && userData.facebook!="" '(click)='openLink(userData.facebook)'>
+								 <ion-icon name="logo-facebook"></ion-icon>
+							</button>
+							<button *ngIf='userData.linked_in!=undefined && userData.linked_in!="" ' (click)='openLink(userData.linked_in)'>
+								 <ion-icon name="logo-linkedin"></ion-icon>
+							</button>
+						</p>
+	        	<p>&nbsp;</p>
+	        </div>
+
+					<ion-row class="profile-canshow" *ngIf='canShow'>
+						<ion-col width-50>
+								<button full class="review-profile" (click)='ShortListCandidate()'>
+										<ion-icon name="md-star"></ion-icon>
+										Shortlist
+								</button>
+						</ion-col>
+						<ion-col width-50>
+								<button full class="remove-profile" (click)='BlockCandidate()'>
+										<ion-icon name="md-remove-circle"></ion-icon>
+										Block
+								</button>
+						</ion-col>
+				</ion-row>
+					<!--<button   primary>Shortlist Candidate</button>
+					<button *ngIf='canShow'  danger>Block Candidate</button>-->
+		</div>
+	</ion-card>
+
+	 
+
+	<!-- // e2r Rating screen -->
+	<!-- NOTE 
+	80+		Green Zone	Professional - usrProfessional
+	60-80	Blue Zone	Good		 - usrGood
+	40-60	Orange Zone	Average		 - usrAvg
+	<40		Red Zone	Poor		 - usrPoor
+	-->
+	<ion-card>
+	  <ion-card-header class="cardHead">
+					Rating 
+					<span class="pull-right orangecolor" *ngIf='userData.rating!=undefined'>{{userData.rating}}/100</span>
+					<span class="pull-right orangecolor" *ngIf='userData.rating==undefined'>Not yet rated.</span>
+	   	 <div class="cssProgress" *ngIf='userData.rating!=undefined'>
+	        <div class="progress1">
+	          <div class="cssProgress-bar cssProgress-info cssProgress-stripes" data-percent="85" [ngStyle]="{'width':userData.rating+'%'}">
+	            <!--<span class="cssProgress-label">75%</span>-->
+	          </div>
+	        </div>
+	      </div>
+		</ion-card-header>
+	   <ion-card-content>
+		 <p class="ashcolor">
+			 Profile Strength: <strong>{{ProfileStrength}}</strong>
+		 <!--<span class="pull-right moreInfo">  <ion-icon name="ios-arrow-down"></ion-icon></span>-->
+		 </p>
+		</ion-card-content>
+	</ion-card>	
+	
+	<!--// Bio Infomation -->
+	<ion-card class="bio">
+	  <ion-card-header class="bb"><ion-icon name="bookmark"></ion-icon> &nbsp;&nbsp;Bio 
+	  	<button *ngIf="is_owner" class="pull-right bediticon" (click) = "openBioEdit()"><ion-icon name="md-create"></ion-icon></button>
+	  </ion-card-header>
+	   <ion-card-content> 
+
+	   	<ion-list no-lines class="pl0">
+
+		  <ion-item>
+				<h2 *ngIf="userData.current_country">{{userData.current_country}}</h2>
+				<h2  class="add-field" *ngIf="!userData.current_country && is_owner" (click) = "openBioEdit()">[+] Add Country</h2>
+				<h2  class="add-field" *ngIf="!userData.current_country && !is_owner">No details found.</h2>
+				<p>Current Country</p>
+		  </ion-item>
+
+		  <ion-item *ngIf="userData.current_country">
+				<h2 *ngIf="userData.current_location">{{userData.current_location}}</h2>
+				<h2  class="add-field" *ngIf="!userData.current_location && is_owner" (click) = "openBioEdit()">[+] Add Location</h2>
+				<h2  class="add-field" *ngIf="!userData.current_location && !is_owner">No details found.</h2>
+				<p>Current Location</p>
+		    <!--<h2>Current Location</h2>
+		    <p *ngIf="userData.current_location">{{userData.current_location}}</p>
+		    <p *ngIf="!userData.current_location && is_owner" (click) = "openBioEdit()">Add Location</p>-->
+		  </ion-item>
+
+		  <ion-item>
+				<h2 *ngIf="userData.desired_salary">{{userData.desired_salary.amount}}</h2>
+				<h2  class="add-field" *ngIf="!userData.desired_salary && is_owner" (click) = "openBioEdit()">[+] Add Salary</h2>
+				<h2  class="add-field" *ngIf="!userData.desired_salary && !is_owner">No details found.</h2>
+				<p>Desired Salary</p>
+		    <!--<h2>Desired Salary</h2>
+		    <p *ngIf="userData.desired_salary">{{userData.desired_salary.amount}}</p>
+		    <p *ngIf="!userData.desired_salary && is_owner" (click) = "openBioEdit()">Add Salary</p>-->
+		  </ion-item>
+
+		  <ion-item>
+				<h2  *ngIf="userData.preffered_job_status">{{userData.preffered_job_status}}</h2>
+				<h2  class="add-field" *ngIf="!userData.preffered_job_status && is_owner" (click) = "openBioEdit()">[+] Add Status</h2>
+				<h2  class="add-field" *ngIf="!userData.preffered_job_status && !is_owner">No details found.</h2>
+				<p>Preffered Job Status</p>
+
+		    <!--<h2>Preffered Job Status</h2>
+		    <p *ngIf="userData.preffered_job_status">{{userData.preffered_job_status}}</p>
+		    <p *ngIf="!userData.preffered_job_status && is_owner" (click) = "openBioEdit()">Add Status</p>-->
+		  </ion-item>
+
+		   <ion-item>
+				<h2 *ngIf="userData.eligibilty_status">{{userData.desired_job_type}}</h2>
+				<h2  class="add-field" *ngIf="!userData.eligibilty_status && is_owner" (click) = "openBioEdit()">[+] Add Eligibility</h2>
+				<h2  class="add-field" *ngIf="!userData.eligibilty_status && !is_owner">No details found.</h2>
+				<p>Desired Job Type</p>
+
+		    <!--<h2>Desired Job Type</h2>
+		    <p *ngIf="userData.eligibilty_status">{{userData.desired_job_type}}</p>
+		    <p *ngIf="!userData.eligibilty_status && is_owner" (click) = "openBioEdit()">Add Eligibility</p>-->
+		  </ion-item>
+
+		  <ion-item>
+				<h2 *ngIf="userData.eligibilty_status">{{userData.eligibilty_status}}</h2>
+				<h2  class="add-field" *ngIf="!userData.eligibilty_status && is_owner" (click) = "openBioEdit()">[+] Add Eligibility</h2>
+				<h2  class="add-field" *ngIf="!userData.eligibilty_status && !is_owner">No details found.</h2>
+				<p>Employment Eligibility Status</p>
+
+		    <!--<h2>Employment Eligibility Status</h2>
+		    <p *ngIf="userData.eligibilty_status">{{userData.eligibilty_status}}</p>
+		    <p *ngIf="!userData.eligibilty_status && is_owner" (click) = "openBioEdit()">Add Eligibility</p>-->
+		  </ion-item>
+
+		   <ion-item>
+				<h2 *ngIf="userData.preffered_location">{{userData.preffered_location}}</h2>
+				<h2  class="add-field" *ngIf="!userData.preffered_location && is_owner" (click) = "openBioEdit()">[+] Add Location</h2>
+				<h2  class="add-field" *ngIf="!userData.preffered_location && !is_owner">No details found.</h2>
+				<p>Preferred Location </p>
+
+		    <!--<h2>Preferred Location </h2>
+		    <p *ngIf="userData.preffered_location">{{userData.preffered_location}}</p>
+		    <p *ngIf="!userData.preffered_location && is_owner" (click) = "openBioEdit()">Add Location</p>-->
+		  </ion-item>
+		   <ion-item>
+				<h2 *ngIf="userData.relocation">{{userData.relocation}}</h2>
+				<h2  class="add-field" *ngIf="!userData.relocation && is_owner" (click) = "openBioEdit()">[+] Add Relocation</h2>
+				<h2  class="add-field" *ngIf="!userData.relocation && !is_owner">No details found.</h2>
+				<p>Relocation</p>
+
+		  </ion-item>
+
+			<ion-item>
+					<h2 class='resume'>
+						<a *ngIf='userData.resumeUrl!=undefined && userData.resumeUrl!=""' download="" target="_blank" href="{{userData.resumeUrl}}">
+								<ion-icon name="md-cloud-download"></ion-icon>
+						</a>
+						<span (click)='viewResume()'>Resume</span> 
+					</h2>
+					<button *ngIf='is_owner' clear dark (click)='editResume()' item-right><ion-icon name="md-create"></ion-icon></button>
+			</ion-item>
+		</ion-list>
+
+	   </ion-card-content>
+	</ion-card>
+
+	<!--// Summary Infomation -->
+	<ion-card class="summary">
+	  <ion-card-header class="bb"><ion-icon name="list-box"></ion-icon> &nbsp;&nbsp; Summary 
+	  	<button *ngIf="is_owner" class="pull-right bediticon" (click) = "openSummaryEdit()" *ngIf="userData.summary"><ion-icon name="md-create"></ion-icon></button>
+	  </ion-card-header>
+	  <ion-card-content> 
+	   <p class="pT10" *ngIf="userData.summary">{{summaryText(userData.summary)}}</p>
+
+		 <h2  class="add-field fieldinfo" *ngIf="!userData.summary && is_owner" (click) = "openSummaryEdit()">[+] Add Profile Summary</h2>
+		 <h2  class="add-field fieldinfo" *ngIf="!userData.summary && !is_owner">No details found.</h2>
+
+		<!--<div class="addCommonFields" *ngIf="!userData.summary && is_owner" (click) = "openSummaryEdit()">
+			 <ion-icon name="md-add"></ion-icon> Add Profile Summary
+		</div>-->
+	  </ion-card-content>
+	  <ion-card-footer *ngIf="userData.summary">
+	  	<p class="text-center seeMore" *ngIf="userData.summary.length>80" (click) = "openSummaryEdit()">SEE MORE</p>
+	  </ion-card-footer>
+	</ion-card>
+	
+	<!--// Keyskills Infomation -->
+	<ion-card class="keyskills">
+	  <ion-card-header class="bb"><ion-icon name="list"></ion-icon> &nbsp;&nbsp; Key Skills 
+	  	<button *ngIf="is_owner" class="pull-right bediticon" (click) = "openSkills('edit')"><ion-icon name="md-create"></ion-icon></button>
+	  </ion-card-header>
+	  <ion-card-content> 
+		<ion-list no-lines class="pl0">
+  		  <div *ngFor="let skillItem of userData.key_skills; let i=index">
+					<ion-item *ngIf="i<3">
+						<span>{{skillItem.skill_name}} <span class='pull-right' *ngIf='skillItem.rating'>{{skillItem.rating}}/100</span></span>
+						</ion-item>
+				</div>
+  		</ion-list>
+			<h2  class="add-field fieldinfo" *ngIf="(userData.key_skills==undefined || userData.key_skills.length==0 )&& is_owner" (click) = "openSkills('edit')">[+] Add Skills</h2>
+			<h2  class="add-field fieldinfo" *ngIf="(userData.key_skills==undefined || userData.key_skills.length==0 )&& !is_owner">No details found.</h2>
+	  </ion-card-content>
+	  <ion-card-footer *ngIf="userData.key_skills">
+	  	<p class="text-center seeMore" (click) = "openSkills('view')" *ngIf="userData.key_skills.length>3">SEE MORE</p>
+	  </ion-card-footer>
+	</ion-card>
+	
+	<!--// Education Infomation -->
+	<ion-card  class="education">
+	  <ion-card-header class="bb"><ion-icon name="school"></ion-icon> &nbsp;&nbsp;Education 
+	  	<button *ngIf="is_owner" class="pull-right bediticon" (click) = "openEducationEdit('edit')"><ion-icon name="md-create"></ion-icon></button>
+	  </ion-card-header>
+	   <ion-card-content> 
+	   	 <ion-item class="pl0" *ngFor="let educationitem of education">
+	   	 	<div *ngIf="userData.education">    
+		    <h2>{{educationitem.school}}</h2>
+		    <p>{{educationitem.degree}}</p>
+				<p>{{educationitem.field}}</p> 
+		    <p>{{educationitem.from_year}} – {{educationitem.to_year}}</p>
+		    </div>
+		 </ion-item>
+		 <!--<p *ngIf="!userData.education && is_owner" (click) = "openEducationEdit('edit')">Add Education</p>-->
+		 <h2  class="add-field fieldinfo" *ngIf="(userData.education==undefined || userData.education.length==0 )&& is_owner" (click) = "openEducationEdit('edit')">[+] Add Education</h2>
+		 <h2  class="add-field fieldinfo" *ngIf="(userData.education==undefined || userData.education.length==0 )&& !is_owner">No details found.</h2>
+	   </ion-card-content>
+	   <ion-card-footer *ngIf="userData.education">
+	  	<p class="text-center seeMore" (click) = "openEducationEdit('view')" *ngIf="userData.education.length>3">SEE MORE</p>
+	   </ion-card-footer>
+	</ion-card>
+
+	<!--// Experience Infomation -->
+	<ion-card  class="experience">
+	  <ion-card-header class="bb"> <ion-icon name="briefcase"></ion-icon> &nbsp;&nbsp;Experience 
+	  	<button *ngIf="is_owner" class="pull-right bediticon" (click) = "openExperienceEdit('edit')"><ion-icon name="md-create"></ion-icon></button>
+	  </ion-card-header>
+	  <!--<h2 class="experinceFocus">5 Years 11 Month</h2>-->
+	   <ion-card-content> 
+			 	<div class="pl0 totexp" *ngIf="userData.experience">
+					 	Total Experience :
+						 <span>{{userData.total_experience}}</span>
+				</div>
+	   	 <ion-item class="pl0"  *ngFor="let experienceitem of experience">  
+	   	 	<div *ngIf="userData.experience">
+			    <h2>{{experienceitem.title}}</h2>
+			    <p>{{experienceitem.company_name}}</p>
+					<p *ngIf="experienceitem.to_year==''">{{experienceitem.from_year}} – Present</p>
+	    		<p *ngIf="experienceitem.to_year!=''">{{experienceitem.from_year}} – {{experienceitem.to_year}} </p>
+		    </div>
+		</ion-item>
+		<!--<p *ngIf="userData.experience!=undefined && userData.experience.length == 0 && is_owner" (click) = "openExperienceEdit('edit')">Add Experience</p>-->
+		<h2  class="add-field fieldinfo" *ngIf="(userData.experience==undefined || userData.experience.length==0 )&& is_owner" (click) = "openExperienceEdit('edit')">[+] Add Experience</h2>
+		<h2  class="add-field fieldinfo" *ngIf="(userData.experience==undefined || userData.experience.length==0 )&& !is_owner">No details found.</h2>
+	   </ion-card-content>
+	   <ion-card-footer *ngIf="userData.experience">
+	  	<p class="text-center seeMore" (click) = "openExperienceEdit('view')" *ngIf="userData.experience.length>3">SEE MORE</p>
+	   </ion-card-footer>
+	</ion-card>
+
+	<!--// Supporting Documents -->
+	
+	<ion-card  class="documents">
+	  <ion-card-header class="bb"> <ion-icon name="document"></ion-icon> &nbsp;&nbsp;Supporting Docs 
+	  	<button *ngIf="is_owner" class="pull-right bediticon" (click) = "openSupportingDocsEdit('edit')"><ion-icon name="md-create"></ion-icon></button>
+	  </ion-card-header>
+	  <!--<h2 class="experinceFocus">5 Years 11 Month</h2>-->
+	   <ion-card-content> 
+
+	   	 <ion-item  class="pl0"  *ngFor="let documentitem of documents" (click)='viewDocs(documentitem.document_url)'>  
+	   	 	<div *ngIf="userData.documents" >
+			    <h2>{{documentitem.document_name}}</h2>
+					<p>{{documentitem.document_description}}</p>
+			    <p>{{setDate(documentitem.modified_on)}}</p>
+		    </div>
+		</ion-item>
+		<!--<p *ngIf="!userData.documents && is_owner" (click) = "openSupportingDocsEdit('edit')">Add Documents</p>-->
+		<h2  class="add-field fieldinfo" *ngIf="(userData.documents==undefined || userData.documents.length==0 )&& is_owner" (click) = "openSupportingDocsEdit('edit')">[+] Add Documents</h2>
+		<h2  class="add-field fieldinfo" *ngIf="(userData.documents==undefined || userData.documents.length==0 )&& !is_owner" >No details found.</h2>
+	   </ion-card-content>
+	   <ion-card-footer *ngIf="userData.documents">
+	  	<p class="text-center seeMore" (click) = "openSupportingDocsEdit('view')" *ngIf="userData.documents.length>3">SEE MORE</p>
+	   </ion-card-footer>
+	</ion-card>
+
+</ion-content>
+
+<ion-footer>
+
+</ion-footer>

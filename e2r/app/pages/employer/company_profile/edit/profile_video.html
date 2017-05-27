@@ -1,0 +1,44 @@
+<ion-header>
+
+    <ion-toolbar>
+        <ion-title>
+            Profile Video
+        </ion-title>
+
+        <ion-buttons start>
+            <button (click)="dismiss($event)">
+        <span showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="companyProfile">
+    <ion-card class="header-edit">
+        <ion-card-content>
+            <ion-list class="editForms mb0">
+
+                <ion-item class="playerinfo" *ngIf="user_data.profile_video!=undefined && user_data.profile_video!=''">
+                    <div class="videoios" showWhen="ios">
+                        <ion-icon name="logo-youtube" (click)='openYouTube(user_data.profile_video)'></ion-icon>
+                        <div>Tap on play button to view video</div>
+                    </div>                    
+                    <iframe showWhen="android,windows" id="youtubeFrame" src="" frameborder="0" width="100%"></iframe>
+                    <!--<iframe src="https://www.youtube.com/embed/MD8U6QV7Pb8" frameborder="0" width="100%"></iframe>-->
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="logo-youtube" item-left></ion-icon>
+                    <ion-label stacked>YouTube video id</ion-label>
+                    <ion-input type="text" (keyup)='loadVideo()' [(ngModel)]="videoId"></ion-input>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>
+
+<ion-footer class="footerbtn">
+    <button type="button" full class="btn btn-default  btnsave" (click)="saveProfileVideo()"><ion-icon name="md-checkmark"></ion-icon> Save</button>
+</ion-footer>

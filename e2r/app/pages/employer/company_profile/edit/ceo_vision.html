@@ -1,0 +1,75 @@
+<ion-header>
+
+    <ion-toolbar>
+        <ion-title>
+            CEO Vision
+        </ion-title>
+
+        <ion-buttons start>
+            <button (click)="dismiss($event)">
+                <span showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="companyProfile">
+
+    <div class="company-basic-edit" *ngIf="edit">
+        <ion-list class="editForms mb0">
+            <div class="text-center">
+                <p class="bluecolor">CEO photo</p>
+                <div class="avatar overflow">
+                    <img src="{{ceo_pictureUrl}}" alt="Default" id="profilePic" />
+                    <ion-icon class="editPhoto" name="md-create" (click)="presentActionSheet()"></ion-icon>
+                </div>
+            </div>
+            <ion-item>
+                <ion-label stacked>CEO Name</ion-label>
+                <ion-input type="text" [(ngModel)]="ceoInputs.ceo_name"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label stacked>Role</ion-label>
+                <ion-input type="text" [(ngModel)]="ceoInputs.ceo_role"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Vision</ion-label>
+                <ion-textarea [(ngModel)]="ceoInputs.ceo_vision"></ion-textarea>
+            </ion-item>
+        </ion-list>
+    </div>
+    
+    <div *ngIf="show">
+        <ion-card *ngIf="userData.ceo_vision">
+          <ion-card-content class="ceo-vision" >
+            <div class="text-center">
+                <div class="avatar overflow ceo_view_avatar" >
+                    <img src="{{ceo_pictureUrl}}" alt="Default" />
+                </div>
+            </div>
+              <h2 class="text-center">{{userData.ceo_vision.name}}</h2>
+              <h4 class="text-center">{{userData.ceo_vision.title}}</h4>
+              <p>{{userData.ceo_vision.aboutme}}</p>
+          </ion-card-content>
+          <!--<ion-card-content (click)="addField()" *ngIf="!userData.ceo_vision">
+              <button full class="btnsave">
+                [+] Add Vision
+              </button>
+          </ion-card-content> -->
+        </ion-card>
+        <div class="nodatafound" *ngIf="!userData.ceo_vision">
+             <ion-icon name="ios-information-circle-outline"></ion-icon>
+             No Data Found...
+        </div>        
+    </div>
+</ion-content>
+
+<ion-footer *ngIf="is_owner" class="footerbtn common-edit">
+  <button fab fab-right fab-bottom class="fixedBottom" (click)="enable()" *ngIf="!edit">
+    <ion-icon name="md-create"></ion-icon>
+  </button>
+  <button type="button" full class="btn btn-default btnsave" (click)="saveCeoEdit(ceoInputs)"  *ngIf="edit"><ion-icon name="md-checkmark" ></ion-icon> Save</button>
+</ion-footer>

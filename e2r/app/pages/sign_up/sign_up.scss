@@ -1,0 +1,31 @@
+.sign-up-page {
+	.txtIconRight {
+	    float: right;
+	    position: absolute;
+	    right: 0;
+	    bottom: 0;
+
+	    .iconShowHide {
+		    font-size: 25px;
+		    color: $white;
+		}
+	}
+
+	.termsCondition{
+		line-height: 25px;
+	}
+	.mt20 {
+		margin-top: 20px;
+	}
+	ion-item.input-has-focus::after, .input-has-value::after {
+        left: 0px;
+    }
+	.desiredsalary {
+		font-size: 18px;
+		span {
+			color: #d09f0b;
+			font-weight: 500;
+    		font-size: 18px;
+		}
+	}
+}

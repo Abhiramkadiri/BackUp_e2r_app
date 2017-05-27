@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar navbar>
+    <ion-title>{{list_title}}</ion-title>
+    <ion-buttons end>
+      <!--<button (click)="onClearSkillFilter()">Clear</button>-->
+    <button (click)="dismiss()">Ok</button>-
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar *ngIf="filter_type=='skill'">
+    <ion-searchbar class="search-result" [(ngModel)]="search_text" (ngModelChange)="onSearchFilterItem()"></ion-searchbar>
+  </ion-toolbar>  
+</ion-header>
+
+<ion-content class="companyProfile">
+<ion-list class="mb0">
+  <ion-item *ngFor="let item of filter_list; let i=index" (click)="selectedFilters(item, i)">
+    {{item.name}}<ion-icon name="checkmark" item-right class="check-icon" *ngIf="item.status"></ion-icon>
+  </ion-item>
+</ion-list>
+</ion-content>
+
+
+
+

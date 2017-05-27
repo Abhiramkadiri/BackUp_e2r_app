@@ -1,0 +1,52 @@
+<ion-header>
+
+    <ion-toolbar>
+        <ion-title>
+            Funding Type
+        </ion-title>
+        
+        <ion-buttons start>
+            <button (click)="dismiss($event)">
+                <span showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>    
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="companyProfile">
+
+    <div  class="company-basic-edit" *ngIf="edit">
+        <ion-list class="editForms mb0">
+            <ion-item>
+                <ion-label stacked>Funding Type</ion-label>
+                <ion-textarea [(ngModel)]="fundInputs.funding_type"></ion-textarea>
+            </ion-item>
+        </ion-list>
+    </div>
+    
+    <div *ngIf="show">
+        <ion-card *ngIf="fundInputs.funding_type">
+          <ion-card-content>
+            {{fundInputs.funding_type}}
+          </ion-card-content>
+          <!--<ion-card-content *ngIf="!fundInputs.funding_type && is_owner" (click)="addField()">
+              <button full class="btnsave">
+                [+] Add Fund Type
+              </button>
+          </ion-card-content>-->
+        </ion-card>
+        <div class="nodatafound" *ngIf="!fundInputs.funding_type">
+             <ion-icon name="ios-information-circle-outline"></ion-icon>
+             No Data Found...
+        </div>
+    </div>
+</ion-content>
+
+<ion-footer *ngIf="is_owner" class="footerbtn common-edit">
+  <button fab fab-right fab-bottom class="fixedBottom" (click)="enable()" *ngIf="!edit">
+    <ion-icon name="md-create"></ion-icon>
+  </button>
+  <button type="button" full class="btn btn-default btnsave" (click)="saveFundEdit(fundInputs)" *ngIf="edit"><ion-icon name="md-checkmark"></ion-icon> Save</button>
+</ion-footer>

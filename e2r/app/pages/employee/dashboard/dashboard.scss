@@ -1,0 +1,218 @@
+.dashboard-page {
+
+  .toolbar-background {
+    background-color:#373a44;
+  } 
+  .bar-button-default, .toolbar-title {
+    color: $white;
+  }
+  .ratingheading {
+    span {
+       font-weight: 600;
+    }
+  }
+  // Offers to review
+  .offersToReview {
+    .notfoundinfo {
+      height: 150px;
+      img {
+        width: 40px;
+      }
+      p {
+        font-size: 14px;
+        color: #666;
+      }
+    }
+    ion-card-header {
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 5px;
+      padding: 10px 16px;
+      h2 {
+          font-weight: 600;
+          padding-left: 15px;
+          float: left;
+          margin-top: 6px;
+          color: #373a44;
+      }
+      img {
+        width: 36px;
+        float: left;
+      }
+    }
+     ion-list {
+       margin-left: -16px;
+       margin-right: -16px;
+       .item {
+         border-bottom: 1px solid #ebecef;
+         .item-inner {
+           border-bottom: none;
+         }
+
+       }
+       > .item:first-child {
+         border-top: none;
+       }
+       > .item:last-child {
+         border-bottom: none;
+       }
+       ion-item {
+         padding-left: 16px;
+       }
+     }
+  }
+}
+
+.dashboard {
+	background-color: #f5f5f5;
+}
+.profile {
+    /*background: $blue;*/
+    background-image: url("../../img/bg3.jpg");
+    background-size: cover;
+    /*padding-top: 5%;*/
+    overflow: hidden;
+    clear: both;
+}
+.avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+.dashboard-employer-page {
+    .avatar img {
+        width: 92px;
+        height: 92px;
+        border-radius: 4px;
+    }
+}
+// Dashboard Page 
+.dashboard-page {
+  .profile {
+    .avatar {
+      img {
+          width: 100px;
+          height: 100px;
+      }
+    }
+  }
+}
+
+.cardHead { border-bottom: 1px solid #ddd; margin-bottom: 10px;}
+.notification { padding-bottom: 0px;}
+.moreInfo {     
+    font-size: 20px;
+    vertical-align: top;
+    line-height: inherit;
+}
+/* ------------------------------
+   progress bar
+   ------------------------------*/
+.cssProgress {
+  width: 100%;
+  margin-top: 10px;
+
+  .progress1,
+  .progress2,
+  .progress3 {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .cssProgress-bar {
+    display: block;
+    float: left;
+    width: 0%;
+    height: 100%;
+    background: $orange;
+    box-shadow: inset 0px -1px 2px rgba(0, 0, 0, 0.1);
+    transition: width 0.8s ease-in-out;
+  }
+
+  .cssProgress-label {
+    position: absolute;
+    overflow: hidden;
+    left: 0px;
+    right: 0px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.7em;
+    text-align: center;
+    text-shadow: 0px 1px rgba(0, 0, 0, 0.3);
+  }
+  .cssProgress-right { float: right !important; }
+
+  .cssProgress-label-left {
+    margin-left: 10px;
+    text-align: left !important;
+  }
+
+  .cssProgress-label-right {
+    margin-right: 10px;
+    text-align: right !important;
+  }
+
+  .cssProgress-label2 {
+    display: block;
+    margin: 2px 0;
+    padding: 0 8px;
+    font-size: 0.8em;
+
+    &.cssProgress-label2-right { text-align: right; }
+    &.cssProgress-label2-center { text-align: center; }
+  }
+
+  .cssProgress-stripes,
+  .cssProgress-active,
+  .cssProgress-active-right {
+    background-image: linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, .125) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, .125) 50%,
+      rgba(255, 255, 255, .125) 75%,
+      transparent 75%,
+      transparent
+    ) !important;
+    background-size: 35px 35px !important;
+  }
+}
+/* -----------------------------------------------------
+	Progress Bar 1
+-------------------------------------------------------- */
+.progress1 {
+  background-color: $pg-default-bg;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.2);
+
+  .cssProgress-bar {
+    height: 22px;
+  }
+
+  .cssProgress-label {
+    line-height: 22px;
+    font-size: $font-size16;
+  }
+}
+
+/* -----------------------------------------------------
+	Progress Bar 3
+-------------------------------------------------------- */
+.progress3 {
+  width: auto !important;
+  padding: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+
+  .cssProgress-bar {
+    height: 16px;
+    border-radius: 3px;
+  }
+
+  .cssProgress-label {
+    line-height: 16px;
+  }
+}

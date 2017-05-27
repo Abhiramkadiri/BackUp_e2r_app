@@ -1,0 +1,77 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            {{page_title}}
+        </ion-title>
+        <ion-buttons start class="close-left">
+            <button (click)="dismiss()">
+              <span showWhen="ios">Cancel</span>
+              <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="lightdarkbg iputfocusandroid">
+<ion-card>
+    <!-- Add Experience List -->
+    <form  (ngSubmit)="onSaveExperience()"   #experienceeditForm="ngForm">
+    <ion-list class="editForms overflow">
+        <ion-item>
+            <ion-label stacked>Company Name (Required)</ion-label>
+            <ion-input type="text" [(ngModel)]="experience_data.company_name" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Title (Required)</ion-label>
+            <ion-input type="text" [(ngModel)]="experience_data.title" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Location </ion-label>
+            <ion-input type="text" [(ngModel)]="experience_data.location" required></ion-input>
+        </ion-item>
+        <ion-item class="bBottomNone pT10">
+            <ion-label>I currently work here</ion-label>
+            <ion-toggle dark [(ngModel)]="experience_data.present_work" (ngModelChange)="setToPeriod()"></ion-toggle>
+        </ion-item>
+        <p>Time period (Required)</p>
+        <ion-item width-50 class="itemSpit pr10">
+            <ion-label stacked>From Month</ion-label>
+            <ion-select [(ngModel)]="experience_data.from_month" (ngModelChange)="onExperienceCalculate()">
+                <ion-option *ngFor="let month of monthListFrom">{{month}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item width-50 class="itemSpit pr10">
+            <ion-label stacked>From Year</ion-label>
+            <ion-select [(ngModel)]="experience_data.from_year" (ngModelChange)="onExperienceCalculate()">
+                <ion-option *ngFor="let year of yearListFrom; let i=index">{{year}}</ion-option>
+            </ion-select>
+        </ion-item>
+
+
+        <ion-item width-50 class="itemSpit pr10" *ngIf="!experience_data.present_work">
+            <ion-label stacked>To Month</ion-label>
+            <ion-select [(ngModel)]="experience_data.to_month" (ngModelChange)="onExperienceCalculate()">
+                <ion-option *ngFor="let month of monthListTo">{{month}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item width-50 class="itemSpit pr10" *ngIf="!experience_data.present_work">
+            <ion-label stacked>To Year</ion-label>
+            <ion-select [(ngModel)]="experience_data.to_year" (ngModelChange)="onExperienceCalculate()">
+                <ion-option *ngFor="let year of yearListTo; let i=index">{{year}}</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <p *ngIf="total_experience">Total Year : {{total_experience}}</p>
+    <p *ngIf="experience_data.worked_period">Duration : {{experience_data.worked_period}}</p>
+    <div class="invalid" *ngIf="!feild_validated">All fields are required.</div>
+    <button type="submit" block class="btn btn-default">{{button_text}}</button>
+    </form>
+    <!--<h4 class="dltGroup" (click) = "deleteExperience()">DELETE EXPERIENCE</h4>-->
+</ion-card>
+</ion-content>
+
+<!--<ion-toolbar class="saveUpdate" position="bottom">
+  <ion-title class="text-center">SAVE</ion-title>
+</ion-toolbar>-->
